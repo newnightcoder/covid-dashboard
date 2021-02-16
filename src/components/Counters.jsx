@@ -8,7 +8,7 @@ import img3 from "../img/recovered.png";
 
 const theme = {
   infected: {
-    default: "#f44336",
+    default: "yellow",
   },
   death: {
     default: "black",
