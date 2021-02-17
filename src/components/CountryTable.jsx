@@ -6,7 +6,7 @@ const CountryTable = ({ countries }) => {
   // console.log("array créé!", listCountries.length);
   // countries.map((country) => {
   return (
-    <div style={{ width: "100%", height: "35vh" }}>
+    <div style={{ width: "100%", height: "35vh", border:"2px solid yellow" }}>
       <h1
         style={{
           // width: "100%",
@@ -34,18 +34,19 @@ const CountryTable = ({ countries }) => {
       >
         <div
           style={{
-            // border: "1px solid pink",
+            border: "10px solid pink",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             position: "absolute",
             top: "10px",
             left: "0",
-            width: "35px",
+            width: "100%",
           }}
         >
-          {countries.map(({ countryInfo }) => (
+          {countries.map(({ countryInfo,i }) => (
             <img
+            key={i}
               alt="country flag"
               src={countryInfo.flag}
               height="20px"
@@ -66,9 +67,10 @@ const CountryTable = ({ countries }) => {
             width: "95%",
           }}
         >
-          {countries.map(({ country }) => (
+          {countries.map(({ country, i }) => (
             <div
-              style={{
+                key={i}
+                style={{
                 border: "1px solid grey",
                 borderLeft: "none",
                 borderRight: "none",

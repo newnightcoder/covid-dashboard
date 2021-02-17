@@ -9,8 +9,6 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: dimgray;
-  /* margin-top: 2vh; */
   @keyframes bleep {
     0% {
       opacity: 1;
@@ -43,9 +41,10 @@ const AppHeader = ({ data: { update } }) => {
   return (
     <Header>
       <AppBar
-        color="primary"
+        // color="primary"
         style={{
-          backgroundColor: "#424242",
+          color:"#eeee",
+          backgroundColor: "#353535",
           height: "90px",
           display: "flex",
           flexDirection: "column",
@@ -70,8 +69,7 @@ const AppHeader = ({ data: { update } }) => {
             style={{
               height: "20px",
               width: "100%",
-              backgroundColor: "#424242",
-              color: "white",
+              color: "#eeee",
               fontSize: ".75rem",
               display: "flex",
               alignItems: "center",

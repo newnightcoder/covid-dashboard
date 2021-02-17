@@ -24,7 +24,7 @@ const SectionTitle = styled.h1`
 /* transform: translateX(-22vw); */
 position:relative;
 margin-left:-50vw;
-color:white;
+color:#eeee;
 `;
 //----------------------------------------------------------------
 const CountersWrapper = styled.div`
@@ -64,7 +64,7 @@ const Counter = styled.div`
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 5px;
+    height: 7px;
     background-color: transparent;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -72,7 +72,6 @@ const Counter = styled.div`
   &:hover {
     cursor: pointer;
     transform: translateY(-3px);
-    /* background-color: rgba(255, 255, 255, 0.5); */
     box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
       0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
     &::after {
