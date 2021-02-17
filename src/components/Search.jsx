@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {useState} from "react";
 
 
 
@@ -30,6 +31,9 @@ const SearchField = styled.div`
 
 
 const Search = ({countries}) => {
+
+  const [inputCountry, setInputCountry] = useState("");
+
   return (
     <div
     style={{
@@ -39,7 +43,7 @@ const Search = ({countries}) => {
       alignItems: "center",
     }}>     
     <SectionTitle>Search a country</SectionTitle>
-    <Input type="text" placeholder="search country"/>
+    <Input type="text" placeholder="search country" onChange={e=>setInputCountry(e.target.value)}/>
 
     <div
         style={{
@@ -59,7 +63,13 @@ const Search = ({countries}) => {
         }}
       >
     <SearchField>
-        {countries.map((country,i)=>
+        {countries.filter((country)=>{
+          if(inputCountry==""){
+            return country.country
+          } else if(country.country.toLowerCase().includes(inputCountry)){
+              return country.country;
+            }
+        }).map((country,i)=>
         <div key={i} style={{color:"black", borderBottom:"1px solid lightgrey", padding:"0 0 3px .25vw", }}>
           <img 
           src= {country.countryInfo.flag} 
