@@ -1,26 +1,40 @@
 import React from "react";
+import styled from "styled-components";
 
-const Search = () => {
+
+
+const SectionTitle = styled.h1`
+  /* transform: translateX(-22vw); */
+  color:white;
+  position:relative;
+  margin-left:-50vw;
+  /* border:1px solid black; */
+`;
+
+
+const SearchField = styled.div`
+  height:50vh;
+  width:100%;
+  background-color:white;
+`;
+
+
+const Search = ({countries}) => {
   return (
-    <div style={{ height: "50vh" }}>
-      <h1 style={{ paddingLeft: "15vw" }}>Search a country</h1>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "97%",
-          height: "35vh",
-          overflowY: "scroll",
-          overflowX: "hidden",
-          margin: "2vh auto",
-          backgroundColor: "white",
-          position: "relative",
-          borderRadius: "5px",
-          //   border: "2px solid black",
-        }}
-      ></div>
+    <div
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    }}>     
+    <SectionTitle>Search a country</SectionTitle>
+    <SearchField>
+      {/* <input type="text" placeholder="search country" > */}
+        {countries.map((country)=><div style={{color:"black"}}>{country.country}</div>)}
+      {/* </input> */}
+    </SearchField>
     </div>
+  
   );
 };
 

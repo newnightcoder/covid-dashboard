@@ -18,8 +18,17 @@ const theme = {
     default: "#2196f3",
   },
 };
+
+//----------------------------------------------------------------
+const SectionTitle = styled.h1`
+/* transform: translateX(-22vw); */
+position:relative;
+margin-left:-50vw;
+color:white;
+`;
 //----------------------------------------------------------------
 const CountersWrapper = styled.div`
+  /* border:1px solid white; */
   width: 100%;
   height: 240px;
   display: flex;
@@ -34,6 +43,7 @@ const CountersWrapper = styled.div`
 `;
 //----------------------------------------------------------------
 const Counter = styled.div`
+/* border: 1px solid red; */
   width: 30%;
   height: 100%;
   display: grid;
@@ -43,7 +53,7 @@ const Counter = styled.div`
   font-weight: 500;
   border-radius: 3px;
   color: ${(props) => theme[props.theme].default};
-  background-color: white;
+  background-color: #eeee;
   position: relative;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
     0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
@@ -62,7 +72,7 @@ const Counter = styled.div`
   &:hover {
     cursor: pointer;
     transform: translateY(-3px);
-    background-color: rgba(255, 255, 255, 0.5);
+    /* background-color: rgba(255, 255, 255, 0.5); */
     box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
       0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
     &::after {
@@ -127,9 +137,7 @@ const TodayWrapper = styled.div`
     padding: 1px 1px 2px;
   }
   &:hover {
-    /* &::after { */
     animation: bleep 1s infinite;
-    /* } */
   }
 `;
 //----------------------------------------------------------------
@@ -204,8 +212,7 @@ const Counters = ({
         alignItems: "center",
       }}
     >
-      <h1 style={{ transform: "translateX(-22vw)" }}>Worldwide statistics</h1>
-
+      <SectionTitle>Worldwide Statistics</SectionTitle>
       <CountersWrapper>
         <Counter theme="infected">
           <ImgWrapper

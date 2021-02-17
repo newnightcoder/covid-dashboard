@@ -1,7 +1,7 @@
 import React from "react";
 
-const CountryTable = ({ data }) => {
-  console.log("table component type", typeof data);
+const CountryTable = ({ countries }) => {
+  // console.log("table component type", typeof countries);
   // const listCountries = [countries];
   // console.log("array créé!", listCountries.length);
   // countries.map((country) => {
@@ -17,7 +17,6 @@ const CountryTable = ({ data }) => {
       </h1>
       <div
         style={{
-          // border: "1px solid yellow",
           display: "flex",
           // flexDirection: "row",
           justifyContent: "center",
@@ -45,7 +44,7 @@ const CountryTable = ({ data }) => {
             width: "35px",
           }}
         >
-          {data.map(({ countryInfo }) => (
+          {countries.map(({ countryInfo }) => (
             <img
               alt="country flag"
               src={countryInfo.flag}
@@ -67,7 +66,7 @@ const CountryTable = ({ data }) => {
             width: "95%",
           }}
         >
-          {data.map(({ country }) => (
+          {countries.map(({ country }) => (
             <div
               style={{
                 border: "1px solid grey",

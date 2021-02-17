@@ -13,7 +13,6 @@
     "react": "^16.13.1",
     "react-countup": "^4.3.3",
     "react-dom": "^16.13.1",
-    "react-giojs": "0.0.5",
     "react-scripts": "^4.0.2",
     "styled-components": "^5.2.0"
   },
@@ -39,6 +38,8 @@
     ]
   },
   "devDependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "eslint": "^7.20.0",
+    "prettier": "^2.2.1"
   }
 }

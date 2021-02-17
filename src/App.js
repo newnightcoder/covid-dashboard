@@ -5,11 +5,9 @@ import {
   CountryTable,
   Search,
   More,
-  // GlobeSection,
-} from "./components";
+} from "./components/component";
 import { fetchBrief, fetchCountries } from "./api";
 // import axios from "axios";
-// import Gio from "react-giojs";
 
 class App extends React.Component {
   state = {
@@ -26,6 +24,7 @@ class App extends React.Component {
 
     const fetchedCountries = await fetchCountries();
     this.setState({ countries: fetchedCountries });
+    console.log(this.state.countries);
 
     // axios
     //   .get(`../data/sampleData.json`)
@@ -56,9 +55,8 @@ class App extends React.Component {
           data={this.state.data}
         />
         {this.more()}
-        {/* <GlobeSection /> */}
-        <Search />
-        <CountryTable data={this.state.countries} />
+        <Search countries={this.state.countries} />
+        <CountryTable countries={this.state.countries} />
       </div>
     );
   }
