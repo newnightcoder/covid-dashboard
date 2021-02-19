@@ -29,20 +29,35 @@ const SearchField = styled.div`
   left:0;
 `;
 
+const CountryDetails = styled.div`
+  height:30vh;
+  width:15vw;
+  background-color:#eeee;
+  color:black;
+  /* position:absolute;
+  top:0;
+  left:0; */
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+`;
 
 const Search = ({countries }) => {
 
   const [inputCountry, setInputCountry] = useState("");
   const [isOpen, setOpen] = useState(false);
+  const [isClicked, setComponent] = useState(false);
 
   const openDropdown = ()=>{
     setOpen(isOpen=>!isOpen);
   }
 
-  
-  const displayData = () =>{
-    countries.map(country => console.log(country.country));
+  const handleClick = () => {
+    setComponent(isClicked=>!isClicked);
   }
+  
+ 
 
     // return (
     // <div style={{position:"absolute", top:"0",left:"0", border:"1px solid red", height:"20vh", width:"20vw"}}>
@@ -63,7 +78,7 @@ const Search = ({countries }) => {
       alignItems: "center",
     }}>     
     <SectionTitle>Search a country</SectionTitle>
-    <Input type="text" placeholder="search country" onChange={e=>setInputCountry(e.target.value)} onClick={openDropdown}/><i class="fas fa-caret-down"></i>
+    <Input type="text" placeholder="search country" onChange={e=>setInputCountry(e.target.value)} onClick={openDropdown}/><i className="fas fa-caret-down"></i>
 
     <div
         style={{
@@ -90,12 +105,9 @@ const Search = ({countries }) => {
           } else if(country.country.toLowerCase().includes(inputCountry)){
               return <div style={{width:"30vw", border:"10px solid red"}}>{country.country}</div>;
             }
-        }).map((country,i)=>
-        <div 
-        // onClick={() => {
-        //   return <div style={{zIndex:"10000", border:"1px solid red", height:"20vh", width:"20vw", color:"yellow", backgroundColor:"white"}}
-        // >{country.country}</div>}}
-        onClick={()=><div>{country.country}</div>}
+        }).map((country,i)=> 
+         <div 
+        onClick={handleClick}
         key={i} 
         style={{color:"black", borderBottom:"1px solid lightgrey", padding:"0 0 3px .25vw", }}>
           <img 
@@ -105,9 +117,26 @@ const Search = ({countries }) => {
           style={{ borderRadius: "2px", margin: "6px 3px 0px 0px" }}
           />
           {country.country}
+
         </div>)}
+        {/* {isClicked ? <CountryDetails>{country.country}</CountryDetails> : null} */}
+
+        
     </SearchField>
+        
     </div>
+    {countries.map((country,i) => <div key={i} style={{position:"absolute", top:"90%",left:"10vw"}}>
+      {isClicked ? 
+      <CountryDetails>
+        <img src={country.countryInfo.flag} height="28px"
+          width="40px"/>
+      <div>{country.country}</div>
+      <div>cases: {country.cases}</div>
+       <div>deaths: {country.deaths}</div>
+       <div>recovered: {country.recovered}</div>
+       </CountryDetails> 
+       : null}
+       </div>)}
     </div>
   
   );
