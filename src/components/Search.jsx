@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import {useState} from "react";
-
+import Select from "react-select";
 
 
 const SectionTitle = styled.h1`
@@ -31,9 +31,9 @@ const SearchField = styled.div`
 `;
 
 
-const Select = styled.select`
-outline:none;
-`;
+// const Select = styled.select`
+// outline:none;
+// `;
 const CountryDetails = styled.div`
   height:30vh;
   width:15vw;
@@ -48,12 +48,17 @@ align-items:center;
 flex-direction:column;
 `;
 
+
+
+
 const Search = ({countries }) => {
 
   const [inputCountry, setInputCountry] = useState("");
   const [isOpen, setOpen] = useState(false);
   const [isClicked, setComponent] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState("");
+
+
 
   const handleSelect = (e) =>{
     setSelectedCountry(e.target.value);
@@ -71,15 +76,21 @@ const Search = ({countries }) => {
     <div>
     <SectionTitle>select a country</SectionTitle>
     <SearchField>
-    <Select placeholder="select a country" onChange = {handleSelect} maxMenuHeight="200">
+      <Select 
+      options={countries.map(country => { return {value: country.country, label:country.country}})}/>
+
+
+
+
+    {/* <Select placeholder="select a country" onChange = {handleSelect} maxMenuHeight="200">
       {countries.map(country => 
         (<option  value={country.value}>
-          {/* <img src = {country.countryInfo.flag}
+          <img src = {country.countryInfo.flag}
           height="14px"
-          width = "28px"/> */}
+          width = "28px"/>
         {country.country} 
         </option>))}
-    </Select>
+    </Select> */}
 
     {/* <CountryDetails>
     <img src={country.countryInfo.flag} height="28px"
