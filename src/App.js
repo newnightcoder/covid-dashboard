@@ -6,30 +6,30 @@ import {
   Search,
   More,
 } from "./components/component";
-import { fetchBrief, fetchCountries } from "./api";
-// import axios from "axios";
+import { fetchBriefData, fetchCountriesData } from "./api";
 
 class App extends React.Component {
   state = {
     data: {},
     countries: [],
+    country: "",
     showMore: false,
     btnText: "more",
-    geoData: null,
   };
 
   async componentDidMount() {
-    const fetchedData = await fetchBrief();
+    const fetchedData = await fetchBriefData();
     this.setState({ data: fetchedData });
 
-    const fetchedCountries = await fetchCountries();
+    const fetchedCountries = await fetchCountriesData();
     this.setState({ countries: fetchedCountries });
-    console.log(this.state.countries);
-
-    // axios
-    //   .get(`../data/sampleData.json`)
-    //   .then((response) => this.setState({ geoData: response.data }));
   }
+
+  handleCountrySelection = async (country) => {
+    const fetchedCountry = await fetchCountriesData(country);
+    this.setState({ country: fetchedCountry });
+    console.log(country);
+  };
 
   toggleMore = () => {
     this.setState({ showMore: !this.state.showMore });
@@ -38,7 +38,7 @@ class App extends React.Component {
     } else this.setState({ btnText: "close" });
   };
 
-  more = () => {
+  moreBtn = () => {
     if (this.state.showMore) {
       return <More data={this.state.data} />;
     }
@@ -54,8 +54,12 @@ class App extends React.Component {
           toggleMore={this.toggleMore}
           data={this.state.data}
         />
-        {this.more()}
-        <Search countries={this.state.countries} />
+        {this.moreBtn()}
+        <Search
+          country={this.state.country}
+          countries={this.state.countries}
+          handleCountrySelection={this.handleCountrySelection}
+        />
         <CountryTable countries={this.state.countries} />
       </div>
     );

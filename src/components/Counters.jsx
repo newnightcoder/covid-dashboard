@@ -21,10 +21,10 @@ const theme = {
 
 //----------------------------------------------------------------
 const SectionTitle = styled.h1`
-/* transform: translateX(-22vw); */
-position:relative;
-margin-left:-50vw;
-color:#eeee;
+  /* transform: translateX(-22vw); */
+  position: relative;
+  margin-left: -50vw;
+  color: #eeee;
 `;
 //----------------------------------------------------------------
 const CountersWrapper = styled.div`
@@ -43,7 +43,7 @@ const CountersWrapper = styled.div`
 `;
 //----------------------------------------------------------------
 const Counter = styled.div`
-/* border: 1px solid red; */
+  /* border: 1px solid red; */
   width: 30%;
   height: 100%;
   display: grid;
@@ -165,18 +165,7 @@ const TotalWrapper = styled.div`
 //   background-color: transparent;
 // `;
 
-const Counters = ({
-  data: {
-    confirmed,
-    deaths,
-    recovered,
-    todayConfirmed,
-    todayDeaths,
-    todayRecovered,
-  },
-  toggleMore,
-  btnText,
-}) => {
+const Counters = ({ data, toggleMore, btnText }) => {
   // if (!confirmed || !deaths || !recovered) {
   //   return <BriefLoader>loading data...</BriefLoader>;
   // }
@@ -198,7 +187,7 @@ const Counters = ({
     if (f === "fr") return new Intl.NumberFormat("us-US").format(number);
   };
 
-  if (!todayDeaths) {
+  if (!data.todayDeaths) {
     return `loading...`;
   }
 
@@ -209,6 +198,7 @@ const Counters = ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        // border: "2px solid pink",
       }}
     >
       <SectionTitle>Worldwide Statistics</SectionTitle>
@@ -231,23 +221,20 @@ const Counters = ({
             {" "}
             +
             <CountUp
-              end={todayConfirmed}
+              end={data.todayConfirmed}
               start={0}
               duration={5}
               separator={"."}
-            >
-              {/*  + {formatNumbers(todayDeaths, "de")}  */}
-            </CountUp>
-            {/* + {formatNumbers(todayConfirmed, "de")} */}
+            ></CountUp>
           </TodayWrapper>
           <TotalWrapper>
             <span style={{ fontWeight: "bold", marginRight: ".5vw" }}>
               {" "}
-              Total:&nbsp;{numeral(confirmed).format("0,0a")}
+              Total:&nbsp;{numeral(data.confirmed).format("0,0a")}
             </span>
             <br />
             (Exact number:&nbsp;
-            {formatNumbers(confirmed, "fr")})
+            {formatNumbers(data.confirmed, "fr")})
           </TotalWrapper>
         </Counter>
         <Counter theme="death">
@@ -266,18 +253,21 @@ const Counters = ({
           </Title>
           <TodayWrapper>
             +
-            <CountUp end={todayDeaths} start={0} duration={3} separator={"."}>
-              {/*  + {formatNumbers(todayDeaths, "de")}  */}
-            </CountUp>
+            <CountUp
+              end={data.todayDeaths}
+              start={0}
+              duration={3}
+              separator={"."}
+            ></CountUp>
           </TodayWrapper>
 
           <TotalWrapper>
             <span style={{ fontWeight: "bold", marginRight: ".5vw" }}>
-              Total:&nbsp;{numeral(deaths).format("0,0a")}
+              Total:&nbsp;{numeral(data.deaths).format("0,0a")}
             </span>
             <br />
             (Exact number:&nbsp;
-            {formatNumbers(deaths, "fr")})
+            {formatNumbers(data.deaths, "fr")})
           </TotalWrapper>
         </Counter>
         <Counter theme="recovered">
@@ -301,21 +291,18 @@ const Counters = ({
             {" "}
             +
             <CountUp
-              end={todayRecovered}
+              end={data.todayRecovered}
               start={0}
               duration={4}
               separator={"."}
-            >
-              {/*  + {formatNumbers(todayDeaths, "de")}  */}
-            </CountUp>
-            {/* + {formatNumbers(todayRecovered, "de")}  */}
+            ></CountUp>
           </TodayWrapper>
           <TotalWrapper>
             <span style={{ fontWeight: "bold", marginRight: ".5vw" }}>
-              Total:&nbsp;{numeral(recovered).format("0,0a")}
+              Total:&nbsp;{numeral(data.recovered).format("0,0a")}
             </span>
             <br />
-            (Exact number:&nbsp; {formatNumbers(recovered, "fr")})
+            (Exact number:&nbsp; {formatNumbers(data.recovered, "fr")})
           </TotalWrapper>
         </Counter>
       </CountersWrapper>

@@ -1,33 +1,40 @@
 import axios from "axios";
 
-const brief = "https://disease.sh/v3/covid-19/all";
+const url = "https://disease.sh/v3/covid-19";
 
-export const fetchBrief = async () => {
-  const { data } = await axios.get(brief);
-  console.log("api function data", data);
-  const briefData = {
-    confirmed: data.cases,
-    deaths: data.deaths,
-    recovered: data.recovered,
-    todayConfirmed: data.todayCases,
-    todayDeaths: data.todayDeaths,
-    todayRecovered: data.todayRecovered,
-    update: data.updated,
-    critical: data.critical,
-    tests: data.tests,
-  };
-  console.log(briefData);
-  return briefData;
+export const fetchBriefData = async () => {
+  try {
+    const { data } = await axios.get(`${url}/all`);
+    const briefData = {
+      confirmed: data.cases,
+      deaths: data.deaths,
+      recovered: data.recovered,
+      todayConfirmed: data.todayCases,
+      todayDeaths: data.todayDeaths,
+      todayRecovered: data.todayRecovered,
+      update: data.updated,
+      critical: data.critical,
+      tests: data.tests,
+    };
+    console.log("fetchBriefData", data);
+    return briefData;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-const countries = "https://disease.sh/v3/covid-19/countries";
+export const fetchCountriesData = async (country) => {
+  let countriesUrl = `${url}/countries`;
 
-export const fetchCountries = async () => {
-  const { data } = await axios.get(countries);
-  // const test = {
-  //   countries: data.map(({ country }) => country),
-  //   flags: data.map(({ countryInfo }) => countryInfo.flag),
-  // };
-  // console.log("countries du fetch", typeof test.countries);
-  return data;
+  if (country) {
+    countriesUrl = `${url}/countries/${country}`;
+  }
+
+  try {
+    const { data } = await axios.get(countriesUrl);
+    console.log("fetchCountriesData", data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };

@@ -6,7 +6,7 @@ const CountryTable = ({ countries }) => {
   // console.log("array créé!", listCountries.length);
   // countries.map((country) => {
   return (
-    <div style={{ width: "100%", height: "35vh", border:"2px solid yellow" }}>
+    <div style={{ width: "100%", height: "100%", border:"2px solid yellow" }}>
       <h1
         style={{
           // width: "100%",
