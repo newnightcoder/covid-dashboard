@@ -72,8 +72,7 @@ const Header = styled.div`
 
 const appBarStyle = {
   color: "#eeee",
-  // backgroundColor: "#353535",
-  backgroundColor: "transparent",
+  backgroundColor: "#353535",
   height: "90px",
   display: "flex",
   flexDirection: "row",

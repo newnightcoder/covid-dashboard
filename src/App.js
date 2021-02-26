@@ -58,6 +58,7 @@ class App extends React.Component {
           btnText={this.state.btnText}
           toggleMore={this.toggleMore}
           data={this.state.data}
+          country={this.state.country}
         />
         {this.moreBtn()}
         <Search

@@ -6,6 +6,162 @@ import img1 from "../img/virus.jpg";
 import img2 from "../img/rip.png";
 import img3 from "../img/recovered.png";
 
+const Counters = ({ data, toggleMore, btnText, country }) => {
+  const formatNumbers = (number, f) => {
+    if (f === "de") return new Intl.NumberFormat("de-DE").format(number);
+    if (f === "fr") return new Intl.NumberFormat("us-US").format(number);
+  };
+
+  // if (!data.todayDeaths) {
+  //   return `loading...`;
+  // }
+
+  return (
+    <div
+      style={{
+        paddingTop: "10vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        border: "10px solid pink",
+      }}
+    >
+      {/* <SectionTitle>Worldwide Statistics</SectionTitle> */}
+      <CountersWrapper>
+        {/* <Counter theme="infected">
+          <ImgWrapper
+            alt="virus image"
+            style={{
+              background: `url(${img1}) no-repeat center/cover`,
+            }}
+          ></ImgWrapper>
+          <Title>
+            <i
+              style={{ fontSize: "1.3rem", marginRight: "1vh" }}
+              className="fas fa-lungs-virus"
+            ></i>
+            <TitleSpan>confirmed cases</TitleSpan>
+          </Title>
+          <TodayWrapper>
+            {" "}
+            +
+            <CountUp
+              end={country ? country.todayCases : data.todayConfirmed}
+              start={0}
+              duration={5}
+              separator={"."}
+            ></CountUp>
+          </TodayWrapper>
+          <TotalWrapper>
+            <span style={{ fontWeight: "bold", marginRight: ".5vw" }}>
+              {" "}
+              Total:&nbsp;
+              {country
+                ? numeral(country.cases).format("0,0a")
+                : numeral(data.confirmed).format("0,0a")}
+            </span>
+            <br />
+            (Exact number:&nbsp;
+            {country
+              ? formatNumbers(country.cases, "fr")
+              : formatNumbers(data.confirmed, "fr")}
+            )
+          </TotalWrapper>
+        </Counter>
+        <Counter theme="death">
+          <ImgWrapper
+            alt="RIP image"
+            style={{
+              background: `url(${img2}) no-repeat center/150%`,
+            }}
+          ></ImgWrapper>
+          <Title>
+            <i
+              style={{ fontSize: "1.3rem", marginRight: "1vh" }}
+              className="fas fa-skull-crossbones"
+            ></i>
+            <TitleSpan> deaths</TitleSpan>
+          </Title>
+          <TodayWrapper>
+            +
+            <CountUp
+              end={country ? country.todayDeaths : data.todayDeaths}
+              start={0}
+              duration={3}
+              separator={"."}
+            ></CountUp>
+          </TodayWrapper>
+
+          <TotalWrapper>
+            <span style={{ fontWeight: "bold", marginRight: ".5vw" }}>
+              Total:&nbsp;
+              {country
+                ? numeral(country.deaths).format("0,0a")
+                : numeral(data.deaths).format("0,0a")}
+            </span>
+            <br />
+            (Exact number:&nbsp;
+            {country
+              ? formatNumbers(country.deaths, "fr")
+              : formatNumbers(data.deaths, "fr")}
+            )
+          </TotalWrapper>
+        </Counter>
+        <Counter theme="recovered">
+          <ImgWrapper
+            alt="recovered patient with doctors"
+            style={{
+              background: `url(${img3}) no-repeat center/cover`,
+            }}
+          ></ImgWrapper>
+          <Title>
+            <i
+              style={{
+                fontSize: "1.3rem",
+                marginRight: "1vh",
+              }}
+              className="fas fa-virus-slash"
+            ></i>
+            <TitleSpan>recovered</TitleSpan>
+          </Title>
+          <TodayWrapper>
+            {" "}
+            +
+            <CountUp
+              end={country ? country.todayRecovered : data.todayRecovered}
+              start={0}
+              duration={4}
+              separator={"."}
+            ></CountUp>
+          </TodayWrapper>
+          <TotalWrapper>
+            <span style={{ fontWeight: "bold", marginRight: ".5vw" }}>
+              Total:&nbsp;
+              {country
+                ? numeral(country.recovered).format("0,0a")
+                : numeral(data.recovered).format("0,0a")}
+            </span>
+            <br />
+            (Exact number:&nbsp;{" "}
+            {country
+              ? formatNumbers(country.recovered, "fr")
+              : formatNumbers(data.recovered, "fr")}
+            )
+          </TotalWrapper>
+        </Counter> */}
+      </CountersWrapper>
+
+      {/* <button
+        onClick={() => toggleMore()}
+        style={{ width: "10ch", cursor: "pointer" }}
+      >
+        {btnText}
+      </button> */}
+    </div>
+  );
+};
+export default Counters;
+
 const theme = {
   infected: {
     default: "#f44336",
@@ -164,157 +320,3 @@ const TotalWrapper = styled.div`
 //   border-top: 2px solid blue;
 //   background-color: transparent;
 // `;
-
-const Counters = ({ data, toggleMore, btnText }) => {
-  // if (!confirmed || !deaths || !recovered) {
-  //   return <BriefLoader>loading data...</BriefLoader>;
-  // }
-
-  // const [showMore, setShowMore] = useState(false);
-
-  // const toggleMore = () => {
-  //   setShowMore((showMore) => !showMore);
-  // };
-
-  // const more = () => {
-  //   if (showMore) {
-  //     return <More data={confirmed} />;
-  //   }
-  // };
-
-  const formatNumbers = (number, f) => {
-    if (f === "de") return new Intl.NumberFormat("de-DE").format(number);
-    if (f === "fr") return new Intl.NumberFormat("us-US").format(number);
-  };
-
-  if (!data.todayDeaths) {
-    return `loading...`;
-  }
-
-  return (
-    <div
-      style={{
-        paddingTop: "10vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        // border: "2px solid pink",
-      }}
-    >
-      <SectionTitle>Worldwide Statistics</SectionTitle>
-      <CountersWrapper>
-        <Counter theme="infected">
-          <ImgWrapper
-            alt="virus image"
-            style={{
-              background: `url(${img1}) no-repeat center/cover`,
-            }}
-          ></ImgWrapper>
-          <Title>
-            <i
-              style={{ fontSize: "1.3rem", marginRight: "1vh" }}
-              className="fas fa-lungs-virus"
-            ></i>
-            <TitleSpan>confirmed cases</TitleSpan>
-          </Title>
-          <TodayWrapper>
-            {" "}
-            +
-            <CountUp
-              end={data.todayConfirmed}
-              start={0}
-              duration={5}
-              separator={"."}
-            ></CountUp>
-          </TodayWrapper>
-          <TotalWrapper>
-            <span style={{ fontWeight: "bold", marginRight: ".5vw" }}>
-              {" "}
-              Total:&nbsp;{numeral(data.confirmed).format("0,0a")}
-            </span>
-            <br />
-            (Exact number:&nbsp;
-            {formatNumbers(data.confirmed, "fr")})
-          </TotalWrapper>
-        </Counter>
-        <Counter theme="death">
-          <ImgWrapper
-            alt="RIP image"
-            style={{
-              background: `url(${img2}) no-repeat center/150%`,
-            }}
-          ></ImgWrapper>
-          <Title>
-            <i
-              style={{ fontSize: "1.3rem", marginRight: "1vh" }}
-              className="fas fa-skull-crossbones"
-            ></i>
-            <TitleSpan> deaths</TitleSpan>
-          </Title>
-          <TodayWrapper>
-            +
-            <CountUp
-              end={data.todayDeaths}
-              start={0}
-              duration={3}
-              separator={"."}
-            ></CountUp>
-          </TodayWrapper>
-
-          <TotalWrapper>
-            <span style={{ fontWeight: "bold", marginRight: ".5vw" }}>
-              Total:&nbsp;{numeral(data.deaths).format("0,0a")}
-            </span>
-            <br />
-            (Exact number:&nbsp;
-            {formatNumbers(data.deaths, "fr")})
-          </TotalWrapper>
-        </Counter>
-        <Counter theme="recovered">
-          <ImgWrapper
-            alt="recovered patient with doctors"
-            style={{
-              background: `url(${img3}) no-repeat center/cover`,
-            }}
-          ></ImgWrapper>
-          <Title>
-            <i
-              style={{
-                fontSize: "1.3rem",
-                marginRight: "1vh",
-              }}
-              className="fas fa-virus-slash"
-            ></i>
-            <TitleSpan>recovered</TitleSpan>
-          </Title>
-          <TodayWrapper>
-            {" "}
-            +
-            <CountUp
-              end={data.todayRecovered}
-              start={0}
-              duration={4}
-              separator={"."}
-            ></CountUp>
-          </TodayWrapper>
-          <TotalWrapper>
-            <span style={{ fontWeight: "bold", marginRight: ".5vw" }}>
-              Total:&nbsp;{numeral(data.recovered).format("0,0a")}
-            </span>
-            <br />
-            (Exact number:&nbsp; {formatNumbers(data.recovered, "fr")})
-          </TotalWrapper>
-        </Counter>
-      </CountersWrapper>
-
-      <button
-        onClick={() => toggleMore()}
-        style={{ width: "10ch", cursor: "pointer" }}
-      >
-        {btnText}
-      </button>
-      {/* {more()} */}
-    </div>
-  );
-};
-export default Counters;
