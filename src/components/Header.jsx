@@ -1,14 +1,62 @@
 import React from "react";
 import styled from "styled-components";
 import AppBar from "@material-ui/core/AppBar";
+import Select from "react-select";
 // import { fetchBrief } from "../api";
 
+const AppHeader = ({
+  data: { update },
+  countries,
+  country,
+  handleCountrySelection,
+}) => {
+  const options = countries.map((country) => {
+    return { value: country.country, label: country.country };
+  });
+
+  return (
+    <Header>
+      <AppBar style={appBarStyle}>
+        <AppBarWrapper>
+          <div>
+            covid-19 live &nbsp;
+            <i className="fas fa-virus" style={coronaIconStyle}></i>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              // alignItems: "center",
+              // justifyContent: "center",
+              // border: "1px solid yellow",
+              width: "100%",
+            }}
+          >
+            <div style={lastUpdateStyle}>
+              Last update:&nbsp;{new Date(update).toLocaleString()}
+            </div>
+            {/* <button style={refreshBtnStyle}>refresh</button> */}
+          </div>
+        </AppBarWrapper>
+        <Select
+          placeholder="select or type a country..."
+          options={options}
+          onChange={(e) => handleCountrySelection(e.value)}
+          styles={selectStyles}
+        />
+      </AppBar>
+    </Header>
+  );
+};
+
+export default AppHeader;
+
 const Header = styled.div`
-  height: 40px;
+  height: 90px;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  /* border: 10px solid red; */
   @keyframes bleep {
     0% {
       opacity: 1;
@@ -22,69 +70,77 @@ const Header = styled.div`
   }
 `;
 
-// const Title = styled.h1`
-//   font-size: 2rem;
-//   font-weight: 900;
-//   text-transform: uppercase;
-//   /* padding-top: 1vh; */
-// `;
-
-const AppHeader = ({ data: { update } }) => {
-  // const [updateData, setUpdate] = useState("");
-
-  // const updateBrief = async () => {
-  //   const updatedData = await fetchBrief();
-  //   setUpdate({ updatedData });
-  //   console.log("data updated! here's the new fetch!", updatedData);
-  // };
-
-  return (
-    <Header>
-      <AppBar
-        // color="primary"
-        style={{
-          color:"#eeee",
-          backgroundColor: "#353535",
-          height: "90px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: "3rem",
-          textTransform: "uppercase",
-          fontWeight: "700",
-        }}
-      >
-        <div>
-          {/* <Title> */}
-          covid-19 live &nbsp;
-          <i
-            style={{ animation: "bleep 3000ms infinite", fontSize: "3rem" }}
-            className="fas fa-virus"
-          ></i>
-        </div>
-        {/* </Title>{" "} */}
-        <div style={{ display: "flex" }}>
-          <div
-            style={{
-              height: "20px",
-              width: "100%",
-              color: "#eeee",
-              fontSize: ".75rem",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginRight: "1vw",
-            }}
-          >
-            Last update:&nbsp;{new Date(update).toLocaleString()}
-          </div>
-
-          <button style={{ cursor: "pointer" }}>refresh</button>
-        </div>
-      </AppBar>
-    </Header>
-  );
+const appBarStyle = {
+  color: "#eeee",
+  // backgroundColor: "#353535",
+  backgroundColor: "transparent",
+  height: "90px",
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-around",
+  fontSize: "3rem",
+  textTransform: "uppercase",
+  fontWeight: "700",
 };
 
-export default AppHeader;
+const AppBarWrapper = styled.div`
+  height: 100%;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  text-align: left;
+  /* border: 1px solid red; */
+`;
+
+const coronaIconStyle = {
+  animation: "bleep 3000ms infinite",
+  fontSize: "3rem",
+};
+
+const lastUpdateStyle = {
+  height: "20px",
+  width: "100%",
+  color: "#eeee",
+  fontSize: ".75rem",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "left",
+  marginLeft: ".5vw",
+  // border: "1px solid red",
+};
+
+const refreshBtnStyle = {
+  cursor: "pointer",
+};
+
+const selectStyles = {
+  container: (provided, state) => ({
+    ...provided,
+    width: "30%",
+  }),
+  control: (provided, state) => ({
+    ...provided,
+    height: "10px",
+    fontSize: "1rem",
+    textTransform: "capitalize",
+    fontWeight: "500",
+  }),
+  placeholder: (provided, state) => ({
+    ...provided,
+    fontSize: "1.1rem",
+    textTransform: "lowercase",
+    fontWeight: "500",
+  }),
+  menuList: (provided, state) => ({
+    ...provided,
+    fontSize: "1rem",
+    color: "black",
+    textAlign: "left",
+    textTransform: "capitalize",
+    fontWeight: "500",
+    height: "30vh",
+  }),
+};

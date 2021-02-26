@@ -3,12 +3,20 @@ import styled from "styled-components";
 
 const Details = styled.div`
   height: 50vh;
-  width: 30vw;
+  width: 20vw;
   background-color: #eeee;
   color: black;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  flex-direction: column;
+`;
+
+const NumbersWrapper = styled.div`
+  height: 30vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: left;
   flex-direction: column;
 `;
 
@@ -21,10 +29,17 @@ const CountryDetails = ({ country }) => {
         </div>
       ) : null}
       <div>{`${country.country}`.toUpperCase()}</div>
-      <div>infected: {country.cases}</div>
-      <div>dead: {country.deaths}</div>
-      <div>recovered: {country.recovered}</div>
-      <div>today: {country.todayCases}</div>
+      <NumbersWrapper>
+        {country.todayCases > 0 ? (
+          <div> + {country.todayCases} cases today</div>
+        ) : (
+          <div> {country.todayCases} cases today</div>
+        )}
+
+        <div>Total infected: {country.cases}</div>
+        <div>Total deaths: {country.deaths}</div>
+        <div>Total recovered: {country.recovered}</div>
+      </NumbersWrapper>
     </Details>
   );
 };

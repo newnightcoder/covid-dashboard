@@ -1,12 +1,8 @@
 import React from "react";
 
-const CountryTable = ({ countries }) => {
-  // console.log("table component type", typeof countries);
-  // const listCountries = [countries];
-  // console.log("array créé!", listCountries.length);
-  // countries.map((country) => {
+const CountryTable = ({ countries, country }) => {
   return (
-    <div style={{ width: "100%", height: "100%", border:"2px solid yellow" }}>
+    <div style={{ width: "100%", height: "100%", border: "2px solid yellow" }}>
       <h1
         style={{
           // width: "100%",
@@ -32,7 +28,7 @@ const CountryTable = ({ countries }) => {
           border: "2px solid black",
         }}
       >
-        <div
+        {/* <div
           style={{
             border: "10px solid pink",
             display: "flex",
@@ -44,9 +40,9 @@ const CountryTable = ({ countries }) => {
             width: "100%",
           }}
         >
-          {countries.map(({ countryInfo,i }) => (
+          {countries.map(({ countryInfo, i }) => (
             <img
-            key={i}
+              key={i}
               alt="country flag"
               src={countryInfo.flag}
               height="20px"
@@ -69,8 +65,8 @@ const CountryTable = ({ countries }) => {
         >
           {countries.map(({ country, i }) => (
             <div
-                key={i}
-                style={{
+              key={i}
+              style={{
                 border: "1px solid grey",
                 borderLeft: "none",
                 borderRight: "none",
@@ -81,7 +77,7 @@ const CountryTable = ({ countries }) => {
               {country}
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

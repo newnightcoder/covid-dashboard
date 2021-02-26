@@ -48,7 +48,12 @@ class App extends React.Component {
     return (
       <div>
         {" "}
-        <AppHeader data={this.state.data} />
+        <AppHeader
+          data={this.state.data}
+          countries={this.state.countries}
+          handleCountrySelection={this.handleCountrySelection}
+          country={this.state.country}
+        />
         <Counters
           btnText={this.state.btnText}
           toggleMore={this.toggleMore}
@@ -60,7 +65,10 @@ class App extends React.Component {
           countries={this.state.countries}
           handleCountrySelection={this.handleCountrySelection}
         />
-        <CountryTable countries={this.state.countries} />
+        <CountryTable
+          countries={this.state.countries}
+          country={this.state.country}
+        />
       </div>
     );
   }
