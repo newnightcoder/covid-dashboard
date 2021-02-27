@@ -4,12 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Select from "react-select";
 // import { fetchBrief } from "../api";
 
-const AppHeader = ({
-  data: { update },
-  countries,
-  country,
-  handleCountrySelection,
-}) => {
+const AppHeader = ({ data, countries, country, handleCountrySelection }) => {
   const options = countries.map((country) => {
     return { value: country.country, label: country.country };
   });
@@ -32,7 +27,7 @@ const AppHeader = ({
             }}
           >
             <div style={lastUpdateStyle}>
-              Last update:&nbsp;{new Date(update).toLocaleString()}
+              Last update:&nbsp;{new Date(data.update).toLocaleString()}
             </div>
             {/* <button style={refreshBtnStyle}>refresh</button> */}
           </div>
@@ -58,7 +53,7 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* border: 10px solid red; */
+  border-bottom: 1px solid #272727;
   @keyframes bleep {
     0% {
       opacity: 1;

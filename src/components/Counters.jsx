@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import numeral from "numeral";
 import CountUp from "react-countup";
-import img1 from "../img/virus.jpg";
-import img2 from "../img/rip.png";
-import img3 from "../img/recovered.png";
+// import img1 from "../img/virus.jpg";
+// import img2 from "../img/rip.png";
+// import img3 from "../img/recovered.png";
 
 const Counters = ({ data, toggleMore, btnText, country }) => {
   const formatNumbers = (number, f) => {
@@ -17,116 +17,147 @@ const Counters = ({ data, toggleMore, btnText, country }) => {
   // }
 
   return (
-    <CountersWrapper>
-      <Counter theme="infected">
-        <IconContainer theme="infected">
-          <i className="fas fa-viruses" style={iconStyle}></i>
-        </IconContainer>
-        <BriefContainer theme="infected">
-          <Label>infected</Label>
-          <TodayWrapper>
-            +{" "}
-            <CountUp
-              end={country ? country.todayCases : data.todayCases}
-              start={0}
-              duration={5}
-              separator={"."}
-            ></CountUp>{" "}
-          </TodayWrapper>
-          <TotalWrapper>
-            {country
-              ? numeral(country.cases).format("0,0a")
-              : numeral(data.confirmed).format("0,0a")}
-            {/* {country
+    <SectionWrapper>
+      <SectionTitle>
+        {country ? (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              // border: "1px solid red",
+              // paddingLeft: "1.5vw",
+            }}
+          >
+            <FlagImg src={country.countryInfo.flag} />
+            <SectionTitleLink>back to global data</SectionTitleLink>
+          </div>
+        ) : (
+          "Global data"
+        )}
+      </SectionTitle>
+      <CountersWrapper>
+        <Counter theme="infected">
+          <IconContainer theme="infected">
+            <i className="fas fa-viruses" style={iconStyle}></i>
+          </IconContainer>
+          <BriefContainer theme="infected">
+            <Label>infected</Label>
+            <TodayWrapper>
+              +{" "}
+              {country
+                ? formatNumbers(country.todayCases, "de")
+                : formatNumbers(data.todayCases, "de")}
+              {/* <CountUp
+                end={country ? country.todayCases : data.todayCases}
+                start={0}
+                duration={5}
+                separator={"."}
+              ></CountUp>{" "} */}
+            </TodayWrapper>
+            <TotalWrapper>
+              {country
+                ? numeral(country.cases).format("0,0a")
+                : numeral(data.confirmed).format("0,0a")}
+              {/* {country
               ? formatNumbers(country.cases, "de")
               : formatNumbers(data.confirmed, "de")} */}
-          </TotalWrapper>
-        </BriefContainer>
-      </Counter>
-      <Counter theme="severe">
-        <IconContainer theme="severe">
-          <i className="fas fa-lungs-virus" style={iconStyle}></i>
-        </IconContainer>
-        <BriefContainer theme="severe">
-          <Label>severe</Label>
-          <TodayWrapper>
-            +{" "}
-            <CountUp
-              end={country ? country.critical : data.critical}
-              start={0}
-              duration={5}
-              separator={"."}
-            ></CountUp>
-          </TodayWrapper>
-          <TotalWrapper>
-            {/* {country
+            </TotalWrapper>
+          </BriefContainer>
+        </Counter>
+        <Counter theme="severe">
+          <IconContainer theme="severe">
+            <i className="fas fa-lungs-virus" style={iconStyle}></i>
+          </IconContainer>
+          <BriefContainer theme="severe">
+            <Label>severe</Label>
+            <TodayWrapper>
+              +{" "}
+              {country
+                ? formatNumbers(country.critical, "de")
+                : formatNumbers(data.critical, "de")}
+              {/* <CountUp
+                start={0}
+                end={country ? country.critical : data.critical}
+                duration={5}
+                separator={"."}
+              ></CountUp> */}
+            </TodayWrapper>
+            <TotalWrapper>
+              {/* {country
               ? numeral(country.cases).format("0,0a")
               : numeral(data.confirmed).format("0,0a")} */}
-            {country
-              ? formatNumbers(country.critical, "de")
-              : formatNumbers(data.critical, "de")}
-          </TotalWrapper>
-        </BriefContainer>
-      </Counter>
-      <Counter theme="death">
-        <IconContainer theme="death">
-          <i className="fas fa-skull-crossbones" style={iconStyle}></i>
-        </IconContainer>
-        <BriefContainer theme="death">
-          <Label>deaths</Label>
-          <TodayWrapper>
-            +{" "}
-            <CountUp
-              end={country ? country.todayDeaths : data.todayDeaths}
-              start={0}
-              duration={5}
-              separator={"."}
-            ></CountUp>
-          </TodayWrapper>
-          <TotalWrapper>
-            {/* {country
+              {country
+                ? formatNumbers(country.critical, "de")
+                : formatNumbers(data.critical, "de")}
+            </TotalWrapper>
+          </BriefContainer>
+        </Counter>
+        <Counter theme="death">
+          <IconContainer theme="death">
+            <i className="fas fa-skull-crossbones" style={iconStyle}></i>
+          </IconContainer>
+          <BriefContainer theme="death">
+            <Label>deaths</Label>
+            <TodayWrapper>
+              +{" "}
+              {country
+                ? formatNumbers(country.todayDeaths, "de")
+                : formatNumbers(data.todayDeaths, "de")}
+              {/* <CountUp
+                end={country ? country.todayDeaths : data.todayDeaths}
+                start={0}
+                duration={5}
+                separator={"."}
+              ></CountUp> */}
+            </TodayWrapper>
+            <TotalWrapper>
+              {/* {country
               ? numeral(country.cases).format("0,0a")
               : numeral(data.confirmed).format("0,0a")} */}
-            {country
-              ? formatNumbers(country.deaths, "de")
-              : formatNumbers(data.deaths, "de")}
-          </TotalWrapper>
-        </BriefContainer>
-      </Counter>
-      <Counter theme="recovered">
-        <IconContainer theme="recovered">
-          <i className="fas fa-virus-slash" style={iconStyle}></i>
-        </IconContainer>
-        <BriefContainer theme="recovered">
-          <Label>recovered</Label>
-          <TodayWrapper>
-            +{" "}
-            <CountUp
-              end={country ? country.todayRecovered : data.todayRecovered}
-              start={0}
-              duration={5}
-              separator={"."}
-            ></CountUp>
-          </TodayWrapper>
-          <TotalWrapper>
-            {/* {country
+              {country
+                ? formatNumbers(country.deaths, "de")
+                : formatNumbers(data.deaths, "de")}
+            </TotalWrapper>
+          </BriefContainer>
+        </Counter>
+        <Counter theme="recovered">
+          <IconContainer theme="recovered">
+            <i className="fas fa-virus-slash" style={iconStyle}></i>
+          </IconContainer>
+          <BriefContainer theme="recovered">
+            <Label>recovered</Label>
+            <TodayWrapper>
+              +{" "}
+              {country
+                ? formatNumbers(country.todayRecovered, "de")
+                : formatNumbers(data.todayRecovered, "de")}
+              {/* <CountUp
+                end={country ? country.todayRecovered : data.todayRecovered}
+                start={0}
+                duration={5}
+                separator={"."}
+              ></CountUp> */}
+            </TodayWrapper>
+            <TotalWrapper>
+              {/* {country
               ? numeral(country.cases).format("0,0a")
               : numeral(data.confirmed).format("0,0a")} */}
-            {country
-              ? formatNumbers(country.recovered, "de")
-              : formatNumbers(data.recovered, "de")}
-          </TotalWrapper>
-        </BriefContainer>
-      </Counter>
-      <Counter theme="vaccinated">
-        <IconContainer theme="vaccinated">
-          <i className="fas fa-syringe" style={iconStyle}></i>
-        </IconContainer>
-        <BriefContainer theme="vaccinated">
-          <Label>vaccinated</Label>
-        </BriefContainer>
-      </Counter>
-    </CountersWrapper>
+              {country
+                ? formatNumbers(country.recovered, "de")
+                : formatNumbers(data.recovered, "de")}
+            </TotalWrapper>
+          </BriefContainer>
+        </Counter>
+        <Counter theme="vaccinated">
+          <IconContainer theme="vaccinated">
+            <i className="fas fa-syringe" style={iconStyle}></i>
+          </IconContainer>
+          <BriefContainer theme="vaccinated">
+            <Label>vaccinated</Label>
+          </BriefContainer>
+        </Counter>
+      </CountersWrapper>
+    </SectionWrapper>
   );
 };
 export default Counters;
@@ -140,7 +171,7 @@ const theme = {
     default: "#f44336",
   },
   death: {
-    default: "black",
+    default: "#A19C9C",
     // "#A19C9C",
   },
   recovered: {
@@ -151,23 +182,60 @@ const theme = {
   },
 };
 
+const SectionWrapper = styled.div`
+  grid-row: 2;
+  height: 18vh;
+  /* margin-top: 2vh; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* border: 1px solid yellow; */
+`;
 //----------------------------------------------------------------
-const SectionTitle = styled.h1`
-  /* transform: translateX(-22vw); */
-  position: relative;
-  margin-left: -50vw;
-  color: #eeee;
+const SectionTitle = styled.div`
+  font-size: 1rem;
+  color: white;
+  padding-left: 1.5vw;
+  text-transform: uppercase;
+  text-decoration: underline;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 1vh;
+  /* border: 1px solid red; */
+`;
+
+const SectionTitleLink = styled.div`
+  font-size: 0.8rem;
+  color: white;
+  padding-left: 1.5vw;
+  text-transform: uppercase;
+  text-decoration: underline;
+  height: 50%;
+  /* border: 1px solid red; */
+
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const FlagImg = styled.img`
+  height: 6vh;
+  width: 6vw;
+  border-radius: 2px;
 `;
 //----------------------------------------------------------------
 const CountersWrapper = styled.div`
-  grid-row: 2;
-  height: 8vh;
-  margin-top: 2vh;
+  height: 50%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  /* border: 10px solid pink; */
+  /* border: 1px solid pink; */
 `;
 //----------------------------------------------------------------
 const Counter = styled.div`
@@ -179,15 +247,12 @@ const Counter = styled.div`
   text-align: center;
   font-size: 1rem;
   font-weight: 500;
+  color: #eeee;
   border-radius: 3px;
-  /* border-bottom: 3px solid transparent; */
-  /* border: 1px solid ${(props) => theme[props.theme].default}; */
-  color: ${(props) => theme[props.theme].default};
   background-color: #35353535;
   position: relative;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
     0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-  transition: transform 250ms;
   &::after {
     content: "";
     position: absolute;
@@ -234,7 +299,6 @@ const iconStyle = {
 const BriefContainer = styled.div`
   grid-column: 3;
   padding: "0";
-  color: #eeee;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -268,16 +332,6 @@ const TodayWrapper = styled.div`
 `;
 
 //----------------------------------------------------------------
-const ImgWrapper = styled.div`
-  width: 100%;
-  grid-row: 1;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-`;
-//----------------------------------------------------------------
 const Title = styled.div`
   grid-row: 2;
   align-self: center;
@@ -297,28 +351,7 @@ const TitleSpan = styled.span`
   text-transform: uppercase;
   font-weight: 800;
 `;
-//----------------------------------------------------------------
-// const TodayWrapper = styled.div`
-//   font-size: 1.3rem;
-//   /* font-weight: 600; */
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   &::after {
-//     content: "today";
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     font-size: 0.75rem;
-//     margin-left: 0.75em;
-//     height: 15px;
-//     width: 50px;
-//     color: black;
-//     border: 1px solid lightgray;
-//     border-radius: 3px;
-//     padding: 1px 1px 2px;
-//   }
-// `;
+
 //----------------------------------------------------------------
 
 // const BriefLoader = styled.div`
@@ -335,134 +368,3 @@ const TitleSpan = styled.span`
 //   border-top: 2px solid blue;
 //   background-color: transparent;
 // `;
-
-/* <SectionTitle>Worldwide Statistics</SectionTitle> */
-
-/* <Counter theme="infected">
-          <ImgWrapper
-            alt="virus image"
-            style={{
-              background: `url(${img1}) no-repeat center/cover`,
-            }}
-          ></ImgWrapper>
-          <Title>
-            <i
-              style={{ fontSize: "1.3rem", marginRight: "1vh" }}
-              className="fas fa-lungs-virus"
-            ></i>
-            <TitleSpan>confirmed cases</TitleSpan>
-          </Title>
-          <TodayWrapper>
-            {" "}
-            +
-            <CountUp
-              end={country ? country.todayCases : data.todayConfirmed}
-              start={0}
-              duration={5}
-              separator={"."}
-            ></CountUp>
-          </TodayWrapper>
-          <TotalWrapper>
-            <span style={{ fontWeight: "bold", marginRight: ".5vw" }}>
-              {" "}
-              Total:&nbsp;
-              {country
-                ? numeral(country.cases).format("0,0a")
-                : numeral(data.confirmed).format("0,0a")}
-            </span>
-            <br />
-            (Exact number:&nbsp;
-            {country
-              ? formatNumbers(country.cases, "fr")
-              : formatNumbers(data.confirmed, "fr")}
-            )
-          </TotalWrapper>
-        </Counter>
-        <Counter theme="death">
-          <ImgWrapper
-            alt="RIP image"
-            style={{
-              background: `url(${img2}) no-repeat center/150%`,
-            }}
-          ></ImgWrapper>
-          <Title>
-            <i
-              style={{ fontSize: "1.3rem", marginRight: "1vh" }}
-              className="fas fa-skull-crossbones"
-            ></i>
-            <TitleSpan> deaths</TitleSpan>
-          </Title>
-          <TodayWrapper>
-            +
-            <CountUp
-              end={country ? country.todayDeaths : data.todayDeaths}
-              start={0}
-              duration={3}
-              separator={"."}
-            ></CountUp>
-          </TodayWrapper>
-
-          <TotalWrapper>
-            <span style={{ fontWeight: "bold", marginRight: ".5vw" }}>
-              Total:&nbsp;
-              {country
-                ? numeral(country.deaths).format("0,0a")
-                : numeral(data.deaths).format("0,0a")}
-            </span>
-            <br />
-            (Exact number:&nbsp;
-            {country
-              ? formatNumbers(country.deaths, "fr")
-              : formatNumbers(data.deaths, "fr")}
-            )
-          </TotalWrapper>
-        </Counter>
-        <Counter theme="recovered">
-          <ImgWrapper
-            alt="recovered patient with doctors"
-            style={{
-              background: `url(${img3}) no-repeat center/cover`,
-            }}
-          ></ImgWrapper>
-          <Title>
-            <i
-              style={{
-                fontSize: "1.3rem",
-                marginRight: "1vh",
-              }}
-              className="fas fa-virus-slash"
-            ></i>
-            <TitleSpan>recovered</TitleSpan>
-          </Title>
-          <TodayWrapper>
-            {" "}
-            +
-            <CountUp
-              end={country ? country.todayRecovered : data.todayRecovered}
-              start={0}
-              duration={4}
-              separator={"."}
-            ></CountUp>
-          </TodayWrapper>
-          <TotalWrapper>
-            <span style={{ fontWeight: "bold", marginRight: ".5vw" }}>
-              Total:&nbsp;
-              {country
-                ? numeral(country.recovered).format("0,0a")
-                : numeral(data.recovered).format("0,0a")}
-            </span>
-            <br />
-            (Exact number:&nbsp;{" "}
-            {country
-              ? formatNumbers(country.recovered, "fr")
-              : formatNumbers(data.recovered, "fr")}
-            )
-          </TotalWrapper>
-        </Counter> */
-
-/* <button
-        onClick={() => toggleMore()}
-        style={{ width: "10ch", cursor: "pointer" }}
-      >
-        {btnText}
-      </button> */
