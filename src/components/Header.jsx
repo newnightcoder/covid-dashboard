@@ -18,7 +18,7 @@ const AppHeader = ({
     <Header>
       <AppBar style={appBarStyle}>
         <AppBarWrapper>
-          <div>
+          <div style={{ fontSize: "2.5rem" }}>
             covid-19 live &nbsp;
             <i className="fas fa-virus" style={coronaIconStyle}></i>
           </div>
@@ -51,6 +51,8 @@ const AppHeader = ({
 export default AppHeader;
 
 const Header = styled.div`
+  grid-row: 1;
+  grid-column: 1/2;
   height: 90px;
   text-align: center;
   display: flex;
@@ -74,6 +76,7 @@ const appBarStyle = {
   color: "#eeee",
   backgroundColor: "#353535",
   height: "90px",
+  width: "100%",
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
@@ -81,6 +84,8 @@ const appBarStyle = {
   fontSize: "3rem",
   textTransform: "uppercase",
   fontWeight: "700",
+  position: "relative",
+  boxShadow: "none",
 };
 
 const AppBarWrapper = styled.div`

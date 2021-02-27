@@ -7,6 +7,15 @@ import {
   More,
 } from "./components/component";
 import { fetchBriefData, fetchCountriesData } from "./api";
+import styled from "styled-components";
+
+const AppWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-template-rows: 100px min-content 1fr;
+`;
 
 class App extends React.Component {
   state = {
@@ -46,7 +55,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <AppWrapper>
         {" "}
         <AppHeader
           data={this.state.data}
@@ -61,7 +70,7 @@ class App extends React.Component {
           country={this.state.country}
         />
         {this.moreBtn()}
-        <Search
+        {/* <Search
           country={this.state.country}
           countries={this.state.countries}
           handleCountrySelection={this.handleCountrySelection}
@@ -69,8 +78,8 @@ class App extends React.Component {
         <CountryTable
           countries={this.state.countries}
           country={this.state.country}
-        />
-      </div>
+        /> */}
+      </AppWrapper>
     );
   }
 }

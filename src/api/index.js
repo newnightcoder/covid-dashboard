@@ -9,7 +9,7 @@ export const fetchBriefData = async () => {
       confirmed: data.cases,
       deaths: data.deaths,
       recovered: data.recovered,
-      todayConfirmed: data.todayCases,
+      todayCases: data.todayCases,
       todayDeaths: data.todayDeaths,
       todayRecovered: data.todayRecovered,
       update: data.updated,
