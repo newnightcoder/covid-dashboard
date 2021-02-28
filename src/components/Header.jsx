@@ -97,6 +97,9 @@ const AppBarWrapper = styled.div`
 const coronaIconStyle = {
   animation: "bleep 3000ms infinite",
   fontSize: "3rem",
+  position: "absolute",
+  left: ".75vw",
+  top: "2vh",
 };
 
 const lastUpdateStyle = {

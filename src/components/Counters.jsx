@@ -1,10 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import numeral from "numeral";
 import CountUp from "react-countup";
-// import img1 from "../img/virus.jpg";
-// import img2 from "../img/rip.png";
-// import img3 from "../img/recovered.png";
 
 const Counters = ({ data, toggleMore, btnText, country }) => {
   const formatNumbers = (number, f) => {
@@ -15,6 +12,12 @@ const Counters = ({ data, toggleMore, btnText, country }) => {
   // if (!data.todayDeaths) {
   //   return `loading...`;
   // }
+
+  const [global, setGlobal] = useState(true);
+
+  const backToGlobal = () => {
+    setGlobal((global) => !global);
+  };
 
   return (
     <SectionWrapper>
@@ -29,12 +32,15 @@ const Counters = ({ data, toggleMore, btnText, country }) => {
             }}
           >
             <FlagImg src={country.countryInfo.flag} />
-            <SectionTitleLink>back to global data</SectionTitleLink>
+            <SectionTitleLink onClick={backToGlobal}>
+              back to global data
+            </SectionTitleLink>
           </div>
         ) : (
           "Global data"
         )}
       </SectionTitle>
+
       <CountersWrapper>
         <Counter theme="infected">
           <IconContainer theme="infected">
