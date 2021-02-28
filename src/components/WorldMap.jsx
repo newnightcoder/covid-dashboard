@@ -5,12 +5,18 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 const WorldMap = () => {
   const minZoom = 2.4;
   const maxZoom = 3;
+
+  // const mapBoxToken =
+  //   "pk.eyJ1IjoibmV3bmlnaHRjb2RlciIsImEiOiJja2xvZzhkbHcwYjBtMndwaHVsaTlyenptIn0.kdWyIEMYBn5m0j9dPiCpPQ";
+  const mapboxAPI = `https://api.mapbox.com/styles/v1/newnightcoder/cklogaqt55a8n17o83ftr9uq1/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`;
+
   return (
     <MapWrapper>
       <MapContainer center={[25, 10]} zoom={minZoom}>
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+          attribution="© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>"
+          // '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+          url={mapboxAPI}
           minZoom="2"
           maxZoom={maxZoom}
         />
