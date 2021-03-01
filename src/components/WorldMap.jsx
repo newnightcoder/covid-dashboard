@@ -23,11 +23,25 @@ const WorldMap = ({ countries, country }) => {
           minZoom="2"
           maxZoom={maxZoom}
         />
-        {filteredCountries.map((country) => (
-          <Marker
-            position={[country.countryInfo.lat, country.countryInfo.long]}
-          ></Marker>
-        ))}
+        {countries
+          .filter((country) => country.cases > 1000000)
+          .map((country) => (
+            <Marker
+              position={[country.countryInfo.lat, country.countryInfo.long]}
+            >
+              <Popup>
+                <img
+                  src={country.countryInfo.flag}
+                  height="20px"
+                  width="34px"
+                />{" "}
+                <br />
+                {country.country.toUpperCase()}
+                <br />
+                cases: {country.cases}
+              </Popup>
+            </Marker>
+          ))}
         {/* )})} */}
       </MapContainer>
     </MapWrapper>
