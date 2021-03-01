@@ -1,6 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  CircleMarker,
+  Popup,
+  Tooltip,
+} from "react-leaflet";
 
 const WorldMap = ({ countries, country }) => {
   const minZoom = 2.4;
@@ -26,21 +32,40 @@ const WorldMap = ({ countries, country }) => {
         {countries
           .filter((country) => country.cases > 1000000)
           .map((country) => (
-            <Marker
-              position={[country.countryInfo.lat, country.countryInfo.long]}
+            <CircleMarker
+              center={[country.countryInfo.lat, country.countryInfo.long]}
+              pathOptions={{ color: "red", weight: ".5" }}
+              radius={country.cases / 250000}
+              // stroke={false}
             >
-              <Popup>
+              <Tooltip
+                opacity={1}
+                // sticky
+                style={{ backgroundColor: "black", color: "white" }}
+              >
                 <img
                   src={country.countryInfo.flag}
                   height="20px"
                   width="34px"
-                />{" "}
+                  style={{ marginLeft: "30%" }}
+                />
                 <br />
-                {country.country.toUpperCase()}
+                <div
+                  style={{
+                    fontWeight: "bold",
+                    margin: "0 0 5px 22.5%",
+                    // border: "1px solid red",
+                  }}
+                >
+                  {country.country.toUpperCase()}
+                </div>
+                TODAY: {country.todayCases}
                 <br />
-                cases: {country.cases}
-              </Popup>
-            </Marker>
+                Severe cases: {country.critical}
+                <br />
+                Total cases: {country.cases}
+              </Tooltip>
+            </CircleMarker>
           ))}
         {/* )})} */}
       </MapContainer>
