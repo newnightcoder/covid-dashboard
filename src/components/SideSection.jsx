@@ -13,4 +13,5 @@ const SideContainer = styled.div`
   height: 100%;
   width: 100%;
   background-color: #272727;
+  border-left: 1px solid black;
 `;

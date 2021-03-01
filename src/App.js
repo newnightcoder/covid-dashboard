@@ -71,7 +71,10 @@ class App extends React.Component {
           data={this.state.data}
           country={this.state.country}
         />
-        <WorldMap />
+        <WorldMap
+          countries={this.state.countries}
+          country={this.state.country}
+        />
         <SideSection />
         {/* {this.moreBtn()} */}
         {/* <Search

@@ -54,6 +54,8 @@ const Header = styled.div`
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid #272727;
+  /* border-bottom: 1px solid yellow; */
+
   @keyframes bleep {
     0% {
       opacity: 1;
