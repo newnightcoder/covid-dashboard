@@ -6,7 +6,7 @@ import CountUp from "react-countup";
 const Counters = ({ data, toggleMore, btnText, country }) => {
   const formatNumbers = (number, f) => {
     if (f === "de") return new Intl.NumberFormat("de-DE").format(number);
-    if (f === "fr") return new Intl.NumberFormat("us-US").format(number);
+    // if (f === "fr") return new Intl.NumberFormat("us-US").format(number);
   };
 
   // if (!data.todayDeaths) {

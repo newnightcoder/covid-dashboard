@@ -16,9 +16,11 @@ const WorldMap = ({ countries, country }) => {
   //   "pk.eyJ1IjoibmV3bmlnaHRjb2RlciIsImEiOiJja2xvZzhkbHcwYjBtMndwaHVsaTlyenptIn0.kdWyIEMYBn5m0j9dPiCpPQ";
   const mapboxAPI = `https://api.mapbox.com/styles/v1/newnightcoder/cklogaqt55a8n17o83ftr9uq1/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`;
 
-  const filteredCountries = countries.filter(
-    (country) => country.cases > 1000000
-  );
+  const formatNumbers = (number, f) => {
+    if (f === "de") return new Intl.NumberFormat("de-DE").format(number);
+    // if (f === "fr") return new Intl.NumberFormat("us-US").format(number);
+  };
+
   return (
     <MapWrapper>
       <MapContainer center={[25, 10]} zoom={minZoom}>
@@ -43,27 +45,34 @@ const WorldMap = ({ countries, country }) => {
                 // sticky
                 style={{ backgroundColor: "black", color: "white" }}
               >
-                <img
-                  src={country.countryInfo.flag}
-                  height="20px"
-                  width="34px"
-                  style={{ marginLeft: "30%" }}
-                />
-                <br />
+                {" "}
                 <div
                   style={{
                     fontWeight: "bold",
-                    margin: "0 0 5px 22.5%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginBottom: "5px",
                     // border: "1px solid red",
                   }}
                 >
+                  <img
+                    src={country.countryInfo.flag}
+                    height="20px"
+                    width="34px"
+                    style={{ marginBottom: "3px" }}
+                  />
                   {country.country.toUpperCase()}
                 </div>
-                TODAY: {country.todayCases}
-                <br />
-                Severe cases: {country.critical}
-                <br />
-                Total cases: {country.cases}
+                <div>
+                  <span style={{ textDecoration: "underline" }}>TODAY</span>:{" "}
+                  {country.todayCases === 0
+                    ? 0
+                    : `+${formatNumbers(country.todayCases, "de")} cases`}
+                </div>
+                <div>Severe cases: {formatNumbers(country.critical, "de")}</div>
+                <div>Total cases: {formatNumbers(country.cases, "de")}</div>
               </Tooltip>
             </CircleMarker>
           ))}

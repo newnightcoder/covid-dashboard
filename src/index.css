@@ -20,7 +20,18 @@ body {
   width: 100%;
   background-color: #353535;
 }
-
+.leaflet-tooltip {
+  background-color: #353535;
+  color: #eee;
+  border: 1px solid lightgrey;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.leaflet-tooltip::before {
+  visibility: hidden;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
