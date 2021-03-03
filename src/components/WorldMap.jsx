@@ -79,10 +79,10 @@ const WorldMap = ({ countries, country }) => {
 export default WorldMap;
 
 const MapWrapper = styled.div`
-  grid-row: 3;
+  /* grid-row: 3;
   grid-column: 1;
-  margin-top: 3vh;
-  height: 93%;
+  margin-top: 3vh; */
+  height: 90%;
   width: 99.5%;
-  border: 1px solid black;
+  border: 1px solid yellow;
 `;

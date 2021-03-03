@@ -5,7 +5,7 @@ import Select from "react-select";
 // import { fetchBrief } from "../api";
 
 const AppHeader = ({ data, countries, country, handleCountrySelection }) => {
-  const options = countries.map((country) => {
+  const options = countries.sort().map((country) => {
     return { value: country.country, label: country.country };
   });
 

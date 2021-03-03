@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
 
@@ -15,21 +16,38 @@ const SideSection = ({ countries }) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          border: "1px solid lightgrey",
         }}
       >
-        SORT COUNTRIES
+        COUNTRIES RANKING
+      </div>
+      <div
+        style={{
+          height: "7vh",
+          color: "#eee",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          border: "1px solid lightgrey",
+        }}
+      >
+        <Button color="white">cases</Button>
+        <Button>deaths</Button>
+        <Button>recovered</Button>
+        <Button>vaccines</Button>
       </div>
       <div
         style={{
           color: "white",
           height: "30vh",
           width: "99%",
-          border: "2px solid lightgray",
           position: "relative",
           overflowY: "scroll",
+          // webkitScrollbarColor: "yellow",
+          border: "2px solid lightgray",
         }}
       >
-        <div style={{ position: "absolute", width: "100%" }}>
+        <TableContainer>
           {countries
             .sort((a, b) => {
               if (a.cases < b.cases) return 1;
@@ -39,7 +57,7 @@ const SideSection = ({ countries }) => {
             .map((country, i) => (
               <div
                 style={{
-                  width: "100%",
+                  width: "99%",
                   display: "flex",
                   alignItems: "center",
                   borderBottom: "1px solid #eee",
@@ -56,19 +74,41 @@ const SideSection = ({ countries }) => {
                 </div>
                 <img
                   src={country.countryInfo.flag}
-                  height="10px"
+                  height="18px"
                   width="18px"
+                  style={{ borderRadius: "50%" }}
                 />
                 <div
                   style={{
                     margin: "0 0 3px 3px",
+                    width: "99%",
+                    display: "flex",
+                    alignItems: "center",
+                    position: "relative",
+                    // border: "1px solid yellow",
                   }}
                 >
-                  {country.country}: {formatNumbers(country.cases, "de")}
+                  <div> {country.country}:</div>{" "}
+                  <div
+                    style={{
+                      fontSize: ".75rem",
+                      marginLeft: "3px",
+                      color: "orange",
+                    }}
+                  >{`+${formatNumbers(country.todayCases, "de")} today`}</div>
+                  <div
+                    style={{
+                      position: "absolute",
+                      right: "20px",
+                      // border: "1px solid pink",
+                    }}
+                  >
+                    {formatNumbers(country.cases, "de")}
+                  </div>
                 </div>
               </div>
             ))}
-        </div>
+        </TableContainer>
       </div>
     </SideContainer>
   );
@@ -84,3 +124,11 @@ const SideContainer = styled.div`
   background-color: #272727;
   border-left: 1px solid black;
 `;
+
+const TableContainer = styled.div`
+  position: absolute;
+  width: 100%;
+`;
+const btnStyle = {
+  color: "#eee",
+};

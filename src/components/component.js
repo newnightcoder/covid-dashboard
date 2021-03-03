@@ -5,3 +5,4 @@ export { default as Counters } from "./Counters";
 // export { default as More } from "./More";
 export { default as WorldMap } from "./WorldMap";
 export { default as SideSection } from "./SideSection";
+export { default as Main } from "./Main";

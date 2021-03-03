@@ -4,9 +4,7 @@ import {
   Counters,
   WorldMap,
   SideSection,
-  CountryTable,
-  Search,
-  // More,
+  Main,
 } from "./components/component";
 import { fetchBriefData, fetchCountriesData } from "./api";
 import styled from "styled-components";
@@ -24,8 +22,6 @@ class App extends React.Component {
     data: {},
     countries: [],
     country: "",
-    showMore: false,
-    btnText: "more",
   };
 
   async componentDidMount() {
@@ -41,19 +37,6 @@ class App extends React.Component {
     this.setState({ country: fetchedCountry });
     console.log(country);
   };
-
-  // toggleMore = () => {
-  //   this.setState({ showMore: !this.state.showMore });
-  //   if (this.state.showMore) {
-  //     this.setState({ btnText: "more" });
-  //   } else this.setState({ btnText: "close" });
-  // };
-
-  // moreBtn = () => {
-  //   if (this.state.showMore) {
-  //     return <More data={this.state.data} />;
-  //   }
-  // };
 
   render() {
     return (
@@ -71,21 +54,8 @@ class App extends React.Component {
           data={this.state.data}
           country={this.state.country}
         />
-        <WorldMap
-          countries={this.state.countries}
-          country={this.state.country}
-        />
+        <Main countries={this.state.countries} country={this.state.country} />
         <SideSection countries={this.state.countries} />
-        {/* {this.moreBtn()} */}
-        {/* <Search
-          country={this.state.country}
-          countries={this.state.countries}
-          handleCountrySelection={this.handleCountrySelection}
-        />
-        <CountryTable
-          countries={this.state.countries}
-          country={this.state.country}
-        /> */}
       </AppWrapper>
     );
   }

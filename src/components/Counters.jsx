@@ -231,7 +231,7 @@ const SectionTitleLink = styled.div`
 
 const FlagImg = styled.img`
   height: 6vh;
-  width: 6vw;
+  width: 5vw;
   border-radius: 2px;
 `;
 //----------------------------------------------------------------
