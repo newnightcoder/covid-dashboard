@@ -84,5 +84,5 @@ const MapWrapper = styled.div`
   margin-top: 3vh; */
   height: 90%;
   width: 99.5%;
-  border: 1px solid yellow;
+  border: 2px solid gray;
 `;

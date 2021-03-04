@@ -38,3 +38,22 @@ export const fetchCountriesData = async (country) => {
     console.log(error);
   }
 };
+
+const historic = "https://pomber.github.io/covid19/timeseries.json";
+// "http://wuhan-coronavirus-api.laeyoung.endpoint.ainize.ai/jhu-edu/timeseries";
+
+export const fetchHistoric = async () => {
+  try {
+    const { data } = await axios.get(historic);
+    // const historicData = data.map((country, i) => {
+    //   return {
+    //     country: country.countryregion,
+    //     data: country.timeseries,
+    //   };
+    // });
+    // console.log(historicData);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};

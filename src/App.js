@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  AppHeader,
-  Counters,
-  WorldMap,
-  SideSection,
-  Main,
-} from "./components/component";
+import { AppHeader, Counters, Main, SideSection } from "./components/component";
 import { fetchBriefData, fetchCountriesData } from "./api";
 import styled from "styled-components";
 
@@ -22,6 +16,7 @@ class App extends React.Component {
     data: {},
     countries: [],
     country: "",
+    countriesList: [],
   };
 
   async componentDidMount() {
@@ -30,6 +25,11 @@ class App extends React.Component {
 
     const fetchedCountries = await fetchCountriesData();
     this.setState({ countries: fetchedCountries });
+
+    const list = await fetchCountriesData();
+    const listing = list.map((country) => country.country);
+    this.setState({ countriesList: listing });
+    console.log(this.state.countriesList);
   }
 
   handleCountrySelection = async (country) => {
@@ -44,7 +44,7 @@ class App extends React.Component {
         {" "}
         <AppHeader
           data={this.state.data}
-          countries={this.state.countries}
+          countriesList={this.state.countriesList}
           handleCountrySelection={this.handleCountrySelection}
           country={this.state.country}
         />

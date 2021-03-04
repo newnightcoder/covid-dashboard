@@ -4,9 +4,14 @@ import AppBar from "@material-ui/core/AppBar";
 import Select from "react-select";
 // import { fetchBrief } from "../api";
 
-const AppHeader = ({ data, countries, country, handleCountrySelection }) => {
-  const options = countries.sort().map((country) => {
-    return { value: country.country, label: country.country };
+const AppHeader = ({
+  data,
+  countriesList,
+  country,
+  handleCountrySelection,
+}) => {
+  const options = countriesList.map((country) => {
+    return { value: country, label: country };
   });
 
   return (

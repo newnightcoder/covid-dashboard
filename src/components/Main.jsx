@@ -29,14 +29,14 @@ const Main = ({ countries, country }) => {
 const MainContainer = styled.div`
   grid-row: 3;
   grid-column: 1;
-  margin-top: 1.5vh;
+  margin: 1.5vh 0 0 0.25vw;
   height: 97%;
-  width: 99.5%;
-  border: 1px solid black;
+  width: 99.3%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
+  /* border: 1px solid yellow; */
 `;
 
 const MainButton = styled.button`
@@ -48,6 +48,7 @@ const MainButton = styled.button`
   color: #353535;
   border: 1px solid white;
   border-radius: 2px;
+  margin-top: 1.25vh;
   &:hover {
     cursor: pointer;
   }
