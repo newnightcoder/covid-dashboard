@@ -32,19 +32,19 @@ export const fetchCountriesData = async (country) => {
 
   try {
     const { data } = await axios.get(countriesUrl);
-    console.log("fetchCountriesData", data);
+    // console.log("fetchCountriesData", data);
     return data;
   } catch (error) {
     console.log(error);
   }
 };
 
-const historic = "https://pomber.github.io/covid19/timeseries.json";
+const historicUrl = "https://pomber.github.io/covid19/timeseries.json";
 // "http://wuhan-coronavirus-api.laeyoung.endpoint.ainize.ai/jhu-edu/timeseries";
 
 export const fetchHistoric = async () => {
   try {
-    const { data } = await axios.get(historic);
+    const { data } = await axios.get(historicUrl);
     // const historicData = data.map((country, i) => {
     //   return {
     //     country: country.countryregion,

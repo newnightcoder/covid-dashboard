@@ -3,7 +3,7 @@ import styled from "styled-components";
 import numeral from "numeral";
 import CountUp from "react-countup";
 
-const Counters = ({ data, toggleMore, btnText, country }) => {
+const Counters = ({ data, country }) => {
   const formatNumbers = (number, f) => {
     if (f === "de") return new Intl.NumberFormat("de-DE").format(number);
     // if (f === "fr") return new Intl.NumberFormat("us-US").format(number);
@@ -28,10 +28,10 @@ const Counters = ({ data, toggleMore, btnText, country }) => {
               display: "flex",
               alignItems: "center",
               // border: "1px solid red",
-              // paddingLeft: "1.5vw",
             }}
           >
             <FlagImg src={country.countryInfo.flag} />
+            <div style={{ marginLeft: ".75vw" }}>{country.country}</div>
             <SectionTitleLink onClick={backToGlobal}>
               back to global data
             </SectionTitleLink>
@@ -203,27 +203,37 @@ const SectionTitle = styled.div`
   color: white;
   padding-left: 1.5vw;
   text-transform: uppercase;
-  text-decoration: underline;
   height: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-bottom: 1vh;
+  position: relative;
   /* border: 1px solid red; */
 `;
 
 const SectionTitleLink = styled.div`
   font-size: 0.8rem;
+  font-weight: 600;
   color: white;
-  padding-left: 1.5vw;
   text-transform: uppercase;
-  text-decoration: underline;
-  height: 50%;
-  /* border: 1px solid red; */
-
-  /* display: flex;
+  height: 100%;
+  width: auto;
+  display: flex;
   flex-direction: column;
-  justify-content: center; */
+  justify-content: center;
+  position: absolute;
+  right: 5.5vw;
+  /* border: 1px solid red; */
+  &::after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    bottom: 34%;
+    right: 0;
+    background-color: white;
+  }
   &:hover {
     cursor: pointer;
   }

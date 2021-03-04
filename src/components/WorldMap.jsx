@@ -30,11 +30,12 @@ const WorldMap = ({ countries, country }) => {
         />
         {countries
           .filter((country) => country.cases > 1000000)
-          .map((country) => (
+          .map((country, i) => (
             <CircleMarker
               center={[country.countryInfo.lat, country.countryInfo.long]}
               pathOptions={{ color: "red", weight: ".5" }}
               radius={country.cases / 250000}
+              key={i}
               // stroke={false}
             >
               <Tooltip

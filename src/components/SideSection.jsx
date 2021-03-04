@@ -31,7 +31,7 @@ const SideSection = ({ countries }) => {
           border: "1px solid lightgrey",
         }}
       >
-        <Button color="white">cases</Button>
+        <Button>cases</Button>
         <Button>deaths</Button>
         <Button>recovered</Button>
         <Button>vaccines</Button>
@@ -63,6 +63,7 @@ const SideSection = ({ countries }) => {
                   borderBottom: "1px solid #eee",
                   paddingLeft: "4px",
                 }}
+                key={i}
               >
                 <div
                   style={{

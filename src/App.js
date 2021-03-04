@@ -15,8 +15,8 @@ class App extends React.Component {
   state = {
     data: {},
     countries: [],
-    country: "",
     countriesList: [],
+    country: "",
   };
 
   async componentDidMount() {
@@ -35,7 +35,6 @@ class App extends React.Component {
   handleCountrySelection = async (country) => {
     const fetchedCountry = await fetchCountriesData(country);
     this.setState({ country: fetchedCountry });
-    console.log(country);
   };
 
   render() {
@@ -46,7 +45,6 @@ class App extends React.Component {
           data={this.state.data}
           countriesList={this.state.countriesList}
           handleCountrySelection={this.handleCountrySelection}
-          country={this.state.country}
         />
         <Counters
           btnText={this.state.btnText}
