@@ -4,7 +4,12 @@ import AppBar from "@material-ui/core/AppBar";
 import Select from "react-select";
 // import { fetchBrief } from "../api";
 
-const AppHeader = ({ data, countriesList, handleCountrySelection }) => {
+const AppHeader = ({
+  data,
+  countriesList,
+  handleCountrySelection,
+  handleChartSelection,
+}) => {
   const options = countriesList.map((country) => {
     return { value: country, label: country };
   });
@@ -35,7 +40,10 @@ const AppHeader = ({ data, countriesList, handleCountrySelection }) => {
         <Select
           placeholder="select or type a country..."
           options={options}
-          onChange={(e) => handleCountrySelection(e.value)}
+          onChange={(e) => {
+            handleCountrySelection(e.value);
+            handleChartSelection(e.value);
+          }}
           styles={selectStyles}
         />
       </AppBar>

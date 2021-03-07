@@ -41,23 +41,36 @@ export const fetchCountriesData = async (country) => {
 
 const historicUrl = "https://pomber.github.io/covid19/timeseries.json";
 
-export const fetchHistoric = async () => {
+export const fetchHistoric = async (country) => {
   const { data } = await axios.get(historicUrl);
+  console.log("historic", data);
 
   let graphArray = {
     dates: [],
     cases: [],
     recov: [],
     dead: [],
+    chartCountries: [],
   };
+  // let chartCountries = [];
 
-  data["Argentina"].forEach(
-    ({ date, confirmed, recovered, deaths }) => (
-      graphArray.dates.push(date),
-      graphArray.cases.push(confirmed),
-      graphArray.recov.push(recovered),
-      graphArray.dead.push(deaths)
-    )
-  );
-  return graphArray;
+  for (let countries in data) {
+    graphArray.chartCountries.push(countries);
+    if (country) {
+      for (let i = 0; i < graphArray.chartCountries.length; i++) {
+        if (country === graphArray.chartCountries[i]) {
+          data[graphArray.chartCountries[i]].forEach(
+            ({ date, confirmed, recovered, deaths }) => (
+              graphArray.dates.push(date),
+              graphArray.cases.push(confirmed),
+              graphArray.recov.push(recovered),
+              graphArray.dead.push(deaths)
+            )
+          );
+          return graphArray;
+        }
+      }
+    }
+  }
+  // console.log("graphArray", graphArray);
 };

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import WorldMap from "./WorldMap";
 import Graphs from "./Graphs";
 
-const Main = ({ countries, country }) => {
+const Main = ({ countries, country, chartCountry, graphsData }) => {
   const [isToggled, setToggle] = useState(false);
   const [toggleBtnText, setToggleBtnText] = useState("to graphs");
 
@@ -18,7 +18,12 @@ const Main = ({ countries, country }) => {
     <MainContainer>
       <MainButton onClick={toggleMain}>{toggleBtnText}</MainButton>
       {isToggled ? (
-        <Graphs countries={countries} country={country} />
+        <Graphs
+          countries={countries}
+          country={country}
+          chartCountry={chartCountry}
+          graphsData={graphsData}
+        />
       ) : (
         <WorldMap countries={countries} />
       )}
