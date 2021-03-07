@@ -40,20 +40,24 @@ export const fetchCountriesData = async (country) => {
 };
 
 const historicUrl = "https://pomber.github.io/covid19/timeseries.json";
-// "http://wuhan-coronavirus-api.laeyoung.endpoint.ainize.ai/jhu-edu/timeseries";
 
 export const fetchHistoric = async () => {
-  try {
-    const { data } = await axios.get(historicUrl);
-    // const historicData = data.map((country, i) => {
-    //   return {
-    //     country: country.countryregion,
-    //     data: country.timeseries,
-    //   };
-    // });
-    // console.log(historicData);
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
+  const { data } = await axios.get(historicUrl);
+
+  let graphArray = {
+    dates: [],
+    cases: [],
+    recov: [],
+    dead: [],
+  };
+
+  data["Argentina"].forEach(
+    ({ date, confirmed, recovered, deaths }) => (
+      graphArray.dates.push(date),
+      graphArray.cases.push(confirmed),
+      graphArray.recov.push(recovered),
+      graphArray.dead.push(deaths)
+    )
+  );
+  return graphArray;
 };

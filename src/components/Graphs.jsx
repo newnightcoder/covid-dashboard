@@ -3,31 +3,16 @@ import styled from "styled-components";
 import { fetchHistoric } from "../api/index";
 import { Line, Bar } from "react-chartjs-2";
 
-const Graphs = ({ countries }) => {
+const Graphs = ({ country }) => {
   const [date, setDate] = useState([]);
   const [confirmed, setConfirmed] = useState([]);
   const mountedRef = useRef(true);
 
   const fetchChartData = async () => {
-    const chartData = await fetchHistoric();
-    console.log("test", chartData);
-    console.log(Object.values(chartData)[0][0].date);
-    let chartDataArray = Object.values(chartData).map((value) => value);
-    console.log("countriesArray", chartDataArray);
-
-    const dates = chartDataArray.map((array) =>
-      array.map((index) => index.date)
-    );
-    const cases = chartDataArray.map((array) =>
-      array.map((index) => index.confirmed)
-    );
-
-    console.log("dates afghanistan", dates[0]);
-    console.log("cases afghanistan", cases[0]);
-
-    setDate(dates[0]);
-    setConfirmed(cases[0]);
-    // return dates, cases;
+    const fetchedChartData = await fetchHistoric();
+    console.log(fetchedChartData.dates);
+    setDate(fetchedChartData.dates);
+    setConfirmed(fetchedChartData.cases);
   };
 
   useEffect(() => {
@@ -37,7 +22,7 @@ const Graphs = ({ countries }) => {
   }, []);
 
   return (
-    <ChartContainer countries={countries}>
+    <ChartContainer country={country}>
       <Line
         height={40}
         width={100}

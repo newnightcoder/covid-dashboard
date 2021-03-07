@@ -18,7 +18,7 @@ const Main = ({ countries, country }) => {
     <MainContainer>
       <MainButton onClick={toggleMain}>{toggleBtnText}</MainButton>
       {isToggled ? (
-        <Graphs countries={countries} />
+        <Graphs countries={countries} country={country} />
       ) : (
         <WorldMap countries={countries} />
       )}
