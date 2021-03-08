@@ -28,7 +28,6 @@ const Graphs = ({
   //     else fetchChartData();
   //     return () => (mountedRef.current = false);
   //   }, []);
-  console.log("graph dates", cases);
   return (
     <ChartContainer>
       {country ? (
@@ -82,7 +81,7 @@ const Graphs = ({
           }}
         />
       ) : (
-        <div>"select a country"</div>
+        <div style={style}>select a country</div>
       )}
     </ChartContainer>
   );
@@ -95,3 +94,14 @@ const ChartContainer = styled.div`
   width: 99.5%;
   border: 2px solid gray;
 `;
+
+const style = {
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  border: "1px solid red",
+  fontSize: "2rem",
+  color: "#eee",
+};

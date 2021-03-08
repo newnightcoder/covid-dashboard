@@ -100,7 +100,10 @@ class App extends React.Component {
           chartCountry={this.state.chartCountry}
           graphsData={this.state.graphsData}
         />
-        <SideSection countries={this.state.countries} />
+        <SideSection
+          countries={this.state.countries}
+          country={this.state.country}
+        />
       </AppWrapper>
     );
   }
