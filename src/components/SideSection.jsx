@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Bar } from "react-chartjs-2";
 import { Button } from "@material-ui/core";
 
 const SideSection = ({ countries, country }) => {
+  const [active, setActive] = useState("cases");
+
   const formatNumbers = (number, f) => {
     if (f === "de") return new Intl.NumberFormat("de-DE").format(number);
     // if (f === "fr") return new Intl.NumberFormat("us-US").format(number);
@@ -12,10 +14,10 @@ const SideSection = ({ countries, country }) => {
     <SideContainer>
       <TitleWrapper>COUNTRIES RANKING</TitleWrapper>
       <ButtonsWrapper>
-        <div>cases</div>
-        <div>deaths</div>
-        <div>recovered</div>
-        <div>vaccines</div>
+        <SortButton theme="cases">cases</SortButton>
+        <SortButton theme="deaths">deaths</SortButton>
+        <SortButton theme="recovered">recovered</SortButton>
+        <SortButton theme="vaccinated">vaccines</SortButton>
       </ButtonsWrapper>
       <TableContainerWrapper>
         <TableContainer>
@@ -69,10 +71,13 @@ const SideContainer = styled.div`
   width: 100%;
   background-color: #181818;
   border-left: 1px solid lightgray;
+  display: grid;
+  grid-template-rows: 7vh 8vh 35vh 45vh;
+  grid-gap: 1.5vh;
 `;
 
 const TitleWrapper = styled.div`
-  height: 10vh;
+  height: 100%;
   color: #eee;
   display: flex;
   align-items: center;
@@ -81,19 +86,63 @@ const TitleWrapper = styled.div`
 `;
 
 const ButtonsWrapper = styled.div`
-  height: 7vh;
+  height: 100%;
   color: #eee;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   /* border: 1px solid red; */
+`;
+
+const theme = {
+  cases: {
+    default: "red",
+  },
+  recovered: {
+    default: "green",
+  },
+  deaths: {
+    default: "lightgray",
+  },
+  vaccinated: {
+    default: "blue",
+  },
+};
+
+const SortButton = styled.button`
+  /* border: 1px solid red; */
+  width: 24%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #eeee;
+  border-radius: 3px;
+  background-color: #353535;
+  position: relative;
+  border: 2px solid transparent;
+  outline: none;
+  &:focus {
+    border: 2px solid ${(props) => theme[props.theme].default};
+  }
+
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
+      0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    border: 2px solid ${(props) => theme[props.theme].default};
+  }
 `;
 
 const TableContainerWrapper = styled.div`
   color: white;
-  height: 35vh;
+  height: 100%;
   width: 99%;
-  margin-top: 5vh;
   position: relative;
   overflow-y: scroll;
   border: 2px solid lightgray;
@@ -145,8 +194,7 @@ const TotalNumber = styled.div`
 `;
 
 const BarChartContainer = styled.div`
-  height: 38vh;
+  height: 100%;
   width: 99%;
-  margin-top: 3vh;
   border: 1px solid red;
 `;
