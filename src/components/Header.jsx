@@ -61,8 +61,8 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid #272727;
-  /* border-bottom: 1px solid yellow; */
+  /* border-bottom: 1px solid #272727; */
+  border-bottom: 1px solid lightgray;
 
   @keyframes bleep {
     0% {
@@ -79,7 +79,9 @@ const Header = styled.div`
 
 const appBarStyle = {
   color: "#eeee",
-  backgroundColor: "#353535",
+  // backgroundColor: "#353535",
+  backgroundColor: "#272727",
+
   height: "90px",
   width: "100%",
   display: "flex",

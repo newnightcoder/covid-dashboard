@@ -4,6 +4,7 @@ import {
   MapContainer,
   TileLayer,
   CircleMarker,
+  Circle,
   Popup,
   Tooltip,
 } from "react-leaflet";
@@ -28,15 +29,15 @@ const WorldMap = ({ countries, country }) => {
           minZoom="2"
           maxZoom={maxZoom}
         />
+
         {countries
-          .filter((country) => country.cases > 1000000)
+          // .filter((country) => country.cases > 1000000)
           .map((country, i) => (
-            <CircleMarker
+            <Circle
               center={[country.countryInfo.lat, country.countryInfo.long]}
               pathOptions={{ color: "red", weight: ".5" }}
-              radius={country.cases / 250000}
+              radius={country.cases > 500000 ? country.cases / 10 : 50000}
               key={i}
-              // stroke={false}
             >
               <Tooltip
                 opacity={1}
@@ -70,7 +71,7 @@ const WorldMap = ({ countries, country }) => {
                 <div>Severe cases: {formatNumbers(country.critical, "de")}</div>
                 <div>Total cases: {formatNumbers(country.cases, "de")}</div>
               </Tooltip>
-            </CircleMarker>
+            </Circle>
           ))}
       </MapContainer>
     </MapWrapper>
@@ -80,10 +81,7 @@ const WorldMap = ({ countries, country }) => {
 export default WorldMap;
 
 const MapWrapper = styled.div`
-  /* grid-row: 3;
-  grid-column: 1;
-  margin-top: 3vh; */
   height: 90%;
   width: 99.5%;
-  border: 2px solid gray;
+  /* border: 2px solid gray; */
 `;

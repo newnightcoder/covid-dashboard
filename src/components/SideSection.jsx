@@ -42,6 +42,20 @@ const SideSection = ({ countries, country }) => {
             ))}
         </TableContainer>
       </TableContainerWrapper>
+      <BarChartContainer>
+        <Bar
+          height={20}
+          width={30}
+          data={{
+            // labels: country.country,
+            datasets: [
+              {
+                // data: country.cases,
+              },
+            ],
+          }}
+        />
+      </BarChartContainer>
     </SideContainer>
   );
 };
@@ -53,8 +67,8 @@ const SideContainer = styled.div`
   grid-row: 1/4;
   height: 100%;
   width: 100%;
-  background-color: #272727;
-  border-left: 1px solid black;
+  background-color: #181818;
+  border-left: 1px solid lightgray;
 `;
 
 const TitleWrapper = styled.div`
@@ -77,8 +91,9 @@ const ButtonsWrapper = styled.div`
 
 const TableContainerWrapper = styled.div`
   color: white;
-  height: 30vh;
+  height: 35vh;
   width: 99%;
+  margin-top: 5vh;
   position: relative;
   overflow-y: scroll;
   border: 2px solid lightgray;
@@ -127,4 +142,11 @@ const TotalNumber = styled.div`
   position: absolute;
   right: 20px;
   /* border: 1px solid pink; */
+`;
+
+const BarChartContainer = styled.div`
+  height: 38vh;
+  width: 99%;
+  margin-top: 3vh;
+  border: 1px solid red;
 `;

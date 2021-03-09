@@ -18,13 +18,13 @@ class App extends React.Component {
     countriesList: [],
     country: "",
     chartCountry: "",
-
     graphsData: {
       dates: [],
       cases: [],
       recov: [],
       dead: [],
     },
+    globalData: true,
   };
 
   async componentDidMount() {
@@ -50,6 +50,21 @@ class App extends React.Component {
   handleCountrySelection = async (country) => {
     const fetchedCountry = await fetchCountriesData(country);
     this.setState({ country: fetchedCountry });
+    if (country) {
+      this.setState({ globalData: false });
+    } else return;
+    console.log("select", this.state.globalData);
+  };
+
+  handleGlobalData = (country) => {
+    if (country) {
+      this.setState((prevState) => ({ globalData: !prevState.globalData }));
+    } else return;
+    console.log("counters", this.state.globalData);
+  };
+
+  backtoGlobalData = () => {
+    this.setState((prevState) => ({ globalData: !prevState.globalData }));
   };
 
   handleChartSelection = async (country) => {
@@ -64,18 +79,6 @@ class App extends React.Component {
         dead: fetchedChartData.dead,
       },
     });
-    // this.setState({
-    //   graphsData: { ...this.state.graphsData, cases: fetchedChartData.cases },
-    // });
-    // this.setState({
-    //   graphsData: { ...this.state.graphsData, recov: fetchedChartData.recov },
-    // });
-    // this.setState({
-    //   graphsData: { ...this.state.graphsData, dead: fetchedChartData.dead },
-    // });
-
-    this.setState();
-    console.log("chartcountries", this.state.chartCountry);
   };
 
   render() {
@@ -89,10 +92,10 @@ class App extends React.Component {
           handleChartSelection={this.handleChartSelection}
         />
         <Counters
-          btnText={this.state.btnText}
-          toggleMore={this.toggleMore}
           data={this.state.data}
           country={this.state.country}
+          globalData={this.state.globalData}
+          backtoGlobalData={this.backtoGlobalData}
         />
         <Main
           countries={this.state.countries}

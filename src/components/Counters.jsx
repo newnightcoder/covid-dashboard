@@ -3,21 +3,22 @@ import styled from "styled-components";
 import numeral from "numeral";
 import CountUp from "react-countup";
 
-const Counters = ({ data, country }) => {
+const Counters = ({ data, country, globalData, backtoGlobalData }) => {
   const formatNumbers = (number, f) => {
     if (f === "de") return new Intl.NumberFormat("de-DE").format(number);
     // if (f === "fr") return new Intl.NumberFormat("us-US").format(number);
   };
 
+  console.log("counters", globalData);
   // if (!data.todayDeaths) {
   //   return `loading...`;
   // }
 
-  const [global, setGlobal] = useState(true);
+  // const [global, setGlobal] = useState(true);
 
-  const backToGlobal = () => {
-    setGlobal((global) => !global);
-  };
+  // const backToGlobal = () => {
+  //   setGlobal((global) => !global);
+  // };
 
   return (
     <SectionWrapper>
@@ -32,7 +33,7 @@ const Counters = ({ data, country }) => {
           >
             <FlagImg src={country.countryInfo.flag} />
             <div style={{ marginLeft: ".75vw" }}>{country.country}</div>
-            <SectionTitleLink onClick={backToGlobal}>
+            <SectionTitleLink onClick={backtoGlobalData}>
               back to global data
             </SectionTitleLink>
           </div>
@@ -246,7 +247,7 @@ const FlagImg = styled.img`
 `;
 //----------------------------------------------------------------
 const CountersWrapper = styled.div`
-  height: 50%;
+  height: 50px;
   display: flex;
   flex-direction: row;
   align-items: center;
