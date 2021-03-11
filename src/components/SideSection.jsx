@@ -1,48 +1,115 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Bar } from "react-chartjs-2";
-import { Button } from "@material-ui/core";
+// import { Button } from "@material-ui/core";
 
 const SideSection = ({ countries, country }) => {
   const [active, setActive] = useState("cases");
+  const activeTypes = ["cases", "deaths", "recovered"];
 
   const formatNumbers = (number, f) => {
     if (f === "de") return new Intl.NumberFormat("de-DE").format(number);
     // if (f === "fr") return new Intl.NumberFormat("us-US").format(number);
   };
+
+  const sortCountries = () => {
+    if (active === "cases") {
+      return countries
+        .sort((a, b) => {
+          if (a.cases < b.cases) return 1;
+          else if (a.cases > b.cases) return -1;
+          else return 0;
+        })
+        .map((country, i) => (
+          <CountryRowWrapper key={i}>
+            <CountryRank>{i + 1}</CountryRank>
+            <CountryFlag src={country.countryInfo.flag} />
+            <CountryRow>
+              <div> {country.country}:</div>{" "}
+              <TodayNumber>
+                {`+${formatNumbers(country.todayCases, "de")}  cases today`}
+              </TodayNumber>
+              <TotalNumber>{formatNumbers(country.cases, "de")}</TotalNumber>
+            </CountryRow>
+          </CountryRowWrapper>
+        ));
+    } else if (active === "deaths") {
+      return countries
+        .sort((a, b) => {
+          if (a.deaths < b.deaths) return 1;
+          else if (a.deaths > b.deaths) return -1;
+          else return 0;
+        })
+        .map((country, i) => (
+          <CountryRowWrapper key={i}>
+            <CountryRank>{i + 1}</CountryRank>
+            <CountryFlag src={country.countryInfo.flag} />
+            <CountryRow>
+              <div> {country.country}:</div>{" "}
+              <TodayNumber>
+                {`+${formatNumbers(country.todayDeaths, "de")}  deaths today`}
+              </TodayNumber>
+              <TotalNumber>{formatNumbers(country.deaths, "de")}</TotalNumber>
+            </CountryRow>
+          </CountryRowWrapper>
+        ));
+    } else if (active === "recovered") {
+      return countries
+        .sort((a, b) => {
+          if (a.recovered < b.recovered) return 1;
+          else if (a.recovered > b.recovered) return -1;
+          else return 0;
+        })
+        .map((country, i) => (
+          <CountryRowWrapper key={i}>
+            <CountryRank>{i + 1}</CountryRank>
+            <CountryFlag src={country.countryInfo.flag} />
+            <CountryRow>
+              <div> {country.country}:</div>{" "}
+              <TodayNumber>
+                {`+${formatNumbers(
+                  country.todayRecovered,
+                  "de"
+                )}  recoveries today`}
+              </TodayNumber>
+              <TotalNumber>
+                {formatNumbers(country.recovered, "de")}
+              </TotalNumber>
+            </CountryRow>
+          </CountryRowWrapper>
+        ));
+    }
+  };
+
   return (
     <SideContainer>
       <TitleWrapper>COUNTRIES RANKING</TitleWrapper>
       <ButtonsWrapper>
-        <SortButton theme="cases">cases</SortButton>
-        <SortButton theme="deaths">deaths</SortButton>
-        <SortButton theme="recovered">recovered</SortButton>
-        <SortButton theme="vaccinated">vaccines</SortButton>
+        <BtnToggle
+          theme="cases"
+          active={active === activeTypes[0]}
+          onClick={() => setActive("cases")}
+        >
+          cases
+        </BtnToggle>
+        <BtnToggle
+          theme="deaths"
+          active={active === activeTypes[1]}
+          onClick={() => setActive("deaths")}
+        >
+          deaths
+        </BtnToggle>
+        <BtnToggle
+          theme="recovered"
+          active={active === activeTypes[2]}
+          onClick={() => setActive("recovered")}
+        >
+          recovered
+        </BtnToggle>
+        <BtnToggle theme="vaccinated">vaccines</BtnToggle>
       </ButtonsWrapper>
       <TableContainerWrapper>
-        <TableContainer>
-          {countries
-            .sort((a, b) => {
-              if (a.cases < b.cases) return 1;
-              else if (a.cases > b.cases) return -1;
-              else return 0;
-            })
-            .map((country, i) => (
-              <CountryRowWrapper key={i}>
-                <CountryRank>{i + 1}</CountryRank>
-                <CountryFlag src={country.countryInfo.flag} />
-                <CountryRow>
-                  <div> {country.country}:</div>{" "}
-                  <TodayNumber>
-                    {`+${formatNumbers(country.todayCases, "de")} today`}
-                  </TodayNumber>
-                  <TotalNumber>
-                    {formatNumbers(country.cases, "de")}
-                  </TotalNumber>
-                </CountryRow>
-              </CountryRowWrapper>
-            ))}
-        </TableContainer>
+        <TableContainer>{sortCountries()}</TableContainer>
       </TableContainerWrapper>
       <BarChartContainer>
         <Bar
@@ -105,7 +172,7 @@ const theme = {
     default: "lightgray",
   },
   vaccinated: {
-    default: "blue",
+    default: "deepskyblue",
   },
 };
 
@@ -116,7 +183,7 @@ const SortButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: #eeee;
   border-radius: 3px;
@@ -124,9 +191,9 @@ const SortButton = styled.button`
   position: relative;
   border: 2px solid transparent;
   outline: none;
-  &:focus {
+  /* &:focus {
     border: 2px solid ${(props) => theme[props.theme].default};
-  }
+  } */
 
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
     0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
@@ -137,6 +204,14 @@ const SortButton = styled.button`
       0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
     border: 2px solid ${(props) => theme[props.theme].default};
   }
+`;
+
+const BtnToggle = styled(SortButton)`
+  ${({ active }) =>
+    active &&
+    css`
+      border: 2px solid ${(props) => theme[props.theme].default};
+    `}
 `;
 
 const TableContainerWrapper = styled.div`
