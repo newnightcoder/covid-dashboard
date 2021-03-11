@@ -7,12 +7,25 @@ const SideSection = ({ countries, country }) => {
   const [active, setActive] = useState("cases");
   const activeTypes = ["cases", "deaths", "recovered"];
 
-  const formatNumbers = (number, f) => {
-    if (f === "de") return new Intl.NumberFormat("de-DE").format(number);
-    // if (f === "fr") return new Intl.NumberFormat("us-US").format(number);
+  const [barChartCountry1, setBarChartCountry1] = useState(null);
+  const [barChartCountry2, setBarChartCountry2] = useState(null);
+  const [barChartCountry3, setBarChartCountry3] = useState(null);
+
+  const selectBarChartCountry = (country) => {
+    if (barChartCountry1 === null) {
+      setBarChartCountry1(country);
+    } else if (barChartCountry1 && barChartCountry2 === null) {
+      setBarChartCountry2(country);
+    } else if (barChartCountry1 && barChartCountry2) {
+      setBarChartCountry3(country);
+    }
   };
 
-  const sortCountries = () => {
+  const formatNumbers = (number, f) => {
+    if (f === "de") return new Intl.NumberFormat("de-DE").format(number);
+  };
+
+  const sortCountriesRanking = () => {
     if (active === "cases") {
       return countries
         .sort((a, b) => {
@@ -21,7 +34,10 @@ const SideSection = ({ countries, country }) => {
           else return 0;
         })
         .map((country, i) => (
-          <CountryRowWrapper key={i}>
+          <CountryRowWrapper
+            key={i}
+            onClick={() => selectBarChartCountry(country)}
+          >
             <CountryRank>{i + 1}</CountryRank>
             <CountryFlag src={country.countryInfo.flag} />
             <CountryRow>
@@ -81,6 +97,52 @@ const SideSection = ({ countries, country }) => {
     }
   };
 
+  const displayBarChart = () => {
+    if (barChartCountry1) {
+      return (
+        <Bar
+          height={22}
+          width={30}
+          data={{
+            labels: [
+              barChartCountry1.country,
+              barChartCountry2 ? barChartCountry2.country : "country 2",
+              barChartCountry3 ? barChartCountry3.country : "country 3",
+            ],
+            datasets: [
+              {
+                data: [
+                  barChartCountry1.cases,
+                  barChartCountry2 ? barChartCountry2.cases : null,
+                  barChartCountry3 ? barChartCountry3.cases : null,
+                ],
+                backgroundColor: ["yellow", "pink", "blue"],
+                borderColor: ["grey", "grey", "grey"],
+                borderWidth: 2,
+              },
+            ],
+          }}
+          options={{
+            title: {
+              display: true,
+              text: "COMPARE 3 COUNTRIES",
+            },
+            legend: {
+              display: false,
+            },
+          }}
+        />
+      );
+    } else
+      return (
+        <BarChartMsg>
+          Select up to 3 countries
+          <br /> in the list above <br />
+          to compare their data
+        </BarChartMsg>
+      );
+  };
+
   return (
     <SideContainer>
       <TitleWrapper>COUNTRIES RANKING</TitleWrapper>
@@ -109,22 +171,9 @@ const SideSection = ({ countries, country }) => {
         <BtnToggle theme="vaccinated">vaccines</BtnToggle>
       </ButtonsWrapper>
       <TableContainerWrapper>
-        <TableContainer>{sortCountries()}</TableContainer>
+        <TableContainer>{sortCountriesRanking()}</TableContainer>
       </TableContainerWrapper>
-      <BarChartContainer>
-        <Bar
-          height={20}
-          width={30}
-          data={{
-            // labels: country.country,
-            datasets: [
-              {
-                // data: country.cases,
-              },
-            ],
-          }}
-        />
-      </BarChartContainer>
+      <BarChartContainer>{displayBarChart()}</BarChartContainer>
     </SideContainer>
   );
 };
@@ -234,6 +283,10 @@ const CountryRowWrapper = styled.div`
   align-items: center;
   border-bottom: 1px solid #eee;
   padding-left: 4px;
+  /* border: 1px solid pink; */
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const CountryRank = styled.div`
@@ -272,4 +325,13 @@ const BarChartContainer = styled.div`
   height: 100%;
   width: 99%;
   border: 1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const BarChartMsg = styled.div`
+  color: #eee;
+  font-size: 1.25rem;
+  text-align: center;
 `;
