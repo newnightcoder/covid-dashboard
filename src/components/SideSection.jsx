@@ -26,14 +26,33 @@ const SideSection = ({ countries, country }) => {
   };
 
   const sortCountriesRanking = () => {
-    if (active === "cases") {
-      return countries
-        .sort((a, b) => {
-          if (a.cases < b.cases) return 1;
-          else if (a.cases > b.cases) return -1;
-          else return 0;
-        })
-        .map((country, i) => (
+    let todayNumber;
+    let totalNumber;
+
+    return countries
+      .sort((a, b) => {
+        if (a.cases < b.cases) return 1;
+        else if (a.cases > b.cases) return -1;
+        else return 0;
+      })
+      .map((country, i) => {
+        if (active === "cases") {
+          todayNumber = `+${country.todayCases}  cases today`;
+          totalNumber = formatNumbers(country.cases, "de");
+        } else if (active === "deaths") {
+          todayNumber = `+${formatNumbers(
+            country.todayDeaths,
+            "de"
+          )}  deaths today`;
+          totalNumber = formatNumbers(country.deaths, "de");
+        } else if (active === "recovered") {
+          todayNumber = `+${formatNumbers(
+            country.todayRecovered,
+            "de"
+          )}  recoveries today`;
+          totalNumber = formatNumbers(country.recovered, "de");
+        }
+        return (
           <CountryRowWrapper
             key={i}
             onClick={() => selectBarChartCountry(country)}
@@ -42,59 +61,12 @@ const SideSection = ({ countries, country }) => {
             <CountryFlag src={country.countryInfo.flag} />
             <CountryRow>
               <div> {country.country}:</div>{" "}
-              <TodayNumber>
-                {`+${formatNumbers(country.todayCases, "de")}  cases today`}
-              </TodayNumber>
-              <TotalNumber>{formatNumbers(country.cases, "de")}</TotalNumber>
+              <TodayNumber>{todayNumber}</TodayNumber>
+              <TotalNumber>{totalNumber}</TotalNumber>
             </CountryRow>
           </CountryRowWrapper>
-        ));
-    } else if (active === "deaths") {
-      return countries
-        .sort((a, b) => {
-          if (a.deaths < b.deaths) return 1;
-          else if (a.deaths > b.deaths) return -1;
-          else return 0;
-        })
-        .map((country, i) => (
-          <CountryRowWrapper key={i}>
-            <CountryRank>{i + 1}</CountryRank>
-            <CountryFlag src={country.countryInfo.flag} />
-            <CountryRow>
-              <div> {country.country}:</div>{" "}
-              <TodayNumber>
-                {`+${formatNumbers(country.todayDeaths, "de")}  deaths today`}
-              </TodayNumber>
-              <TotalNumber>{formatNumbers(country.deaths, "de")}</TotalNumber>
-            </CountryRow>
-          </CountryRowWrapper>
-        ));
-    } else if (active === "recovered") {
-      return countries
-        .sort((a, b) => {
-          if (a.recovered < b.recovered) return 1;
-          else if (a.recovered > b.recovered) return -1;
-          else return 0;
-        })
-        .map((country, i) => (
-          <CountryRowWrapper key={i}>
-            <CountryRank>{i + 1}</CountryRank>
-            <CountryFlag src={country.countryInfo.flag} />
-            <CountryRow>
-              <div> {country.country}:</div>{" "}
-              <TodayNumber>
-                {`+${formatNumbers(
-                  country.todayRecovered,
-                  "de"
-                )}  recoveries today`}
-              </TodayNumber>
-              <TotalNumber>
-                {formatNumbers(country.recovered, "de")}
-              </TotalNumber>
-            </CountryRow>
-          </CountryRowWrapper>
-        ));
-    }
+        );
+      });
   };
 
   const displayBarChart = () => {
@@ -107,7 +79,7 @@ const SideSection = ({ countries, country }) => {
             labels: [
               barChartCountry1.country,
               barChartCountry2 ? barChartCountry2.country : "country 2",
-              barChartCountry3 ? barChartCountry3.country : "country 3",
+              barChartCountry3 ? barChartCountry3.country : "country",
             ],
             datasets: [
               {
@@ -171,7 +143,7 @@ const SideSection = ({ countries, country }) => {
         <BtnToggle theme="vaccinated">vaccines</BtnToggle>
       </ButtonsWrapper>
       <TableContainerWrapper>
-        <TableContainer>{sortCountriesRanking()}</TableContainer>
+        <TableContainer>{sortCountriesRanking(country)}</TableContainer>
       </TableContainerWrapper>
       <BarChartContainer>{displayBarChart()}</BarChartContainer>
     </SideContainer>
@@ -240,9 +212,6 @@ const SortButton = styled.button`
   position: relative;
   border: 2px solid transparent;
   outline: none;
-  /* &:focus {
-    border: 2px solid ${(props) => theme[props.theme].default};
-  } */
 
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
     0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
