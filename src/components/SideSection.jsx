@@ -31,9 +31,19 @@ const SideSection = ({ countries, country }) => {
 
     return countries
       .sort((a, b) => {
-        if (a.cases < b.cases) return 1;
-        else if (a.cases > b.cases) return -1;
-        else return 0;
+        if (active === "cases") {
+          if (a.cases < b.cases) return 1;
+          else if (a.cases > b.cases) return -1;
+          else return 0;
+        } else if (active === "deaths") {
+          if (a.deaths < b.deaths) return 1;
+          else if (a.deaths > b.deaths) return -1;
+          else return 0;
+        } else if (active === "recovered") {
+          if (a.recovered < b.recovered) return 1;
+          else if (a.recovered > b.recovered) return -1;
+          else return 0;
+        }
       })
       .map((country, i) => {
         if (active === "cases") {
