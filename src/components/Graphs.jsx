@@ -8,27 +8,13 @@ const Graphs = ({
   graphsData: { dates, cases, recov, dead },
   chartCountry,
 }) => {
-  //   const [date, setDate] = useState([]);
-  //   const [confirmed, setConfirmed] = useState([]);
-  //   const [recovered, setRecovered] = useState([]);
-  //   const [deaths, setDeaths] = useState([]);
-  //   const mountedRef = useRef(true);
-
-  //   const fetchChartData = async (country) => {
-  //     const fetchedChartData = await fetchHistoric(country);
-  //     console.log(fetchedChartData.dates);
-  //     setDate(fetchedChartData.dates);
-  //     setConfirmed(fetchedChartData.cases);
-  //     setRecovered(fetchedChartData.recov);
-  //     setDeaths(fetchedChartData.dead);
-  //   };
-
-  //   useEffect(() => {
-  //     if (!mountedRef.current) return null;
-  //     else fetchChartData();
-  //     return () => (mountedRef.current = false);
-  //   }, []);
-  return (
+  return !dates || !cases || !recov || !dead ? (
+    <ChartContainer>
+      <div style={style}>
+        oops sorry! we do not have any info for this country
+      </div>
+    </ChartContainer>
+  ) : (
     <ChartContainer>
       {country ? (
         <Line
@@ -85,6 +71,10 @@ const Graphs = ({
       )}
     </ChartContainer>
   );
+
+  // return (
+
+  // );
 };
 
 export default Graphs;

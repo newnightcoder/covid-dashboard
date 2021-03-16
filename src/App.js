@@ -70,15 +70,17 @@ class App extends React.Component {
   handleChartSelection = async (country) => {
     this.setState({ chartCountry: country });
     const fetchedChartData = await fetchHistoric(country);
-    this.setState({
-      graphsData: {
-        ...this.state.graphsData,
-        dates: fetchedChartData.dates,
-        cases: fetchedChartData.cases,
-        recov: fetchedChartData.recov,
-        dead: fetchedChartData.dead,
-      },
-    });
+    if (fetchedChartData) {
+      this.setState({
+        graphsData: {
+          ...this.state.graphsData,
+          dates: fetchedChartData.dates,
+          cases: fetchedChartData.cases,
+          recov: fetchedChartData.recov,
+          dead: fetchedChartData.dead,
+        },
+      });
+    } else return null;
   };
 
   render() {

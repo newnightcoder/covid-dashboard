@@ -63,8 +63,10 @@ const Counters = ({ data, country, globalData, backtoGlobalData }) => {
             </TodayWrapper>
             <TotalWrapper>
               {country
-                ? numeral(country.cases).format("0,0a")
-                : numeral(data.confirmed).format("0,0a")}
+                ? formatNumbers(country.cases, "de")
+                : // numeral(country.cases).format("0,0a")
+                  formatNumbers(data.confirmed, "de")}
+              {/* numeral(data.confirmed).format("0,0a") */}
               {/* {country
               ? formatNumbers(country.cases, "de")
               : formatNumbers(data.confirmed, "de")} */}

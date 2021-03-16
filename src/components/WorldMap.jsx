@@ -7,9 +7,24 @@ import {
   Circle,
   Popup,
   Tooltip,
+  useMap,
 } from "react-leaflet";
 
+const ZoomToCountry = ({ country }) => {
+  const map = useMap();
+  if (country) {
+    return (
+      // map.flyTo(
+      //   [country.countryInfo.lat, country.countryInfo.long],
+      //   map.getZoom()
+      // ),
+      console.log("map", country.country)((Circle.pathOptions.color = "blue"))
+    );
+  } else return null;
+};
+
 const WorldMap = ({ countries, country }) => {
+  // const map = useMap();
   const minZoom = 2.4;
   const maxZoom = 4;
 
@@ -73,6 +88,7 @@ const WorldMap = ({ countries, country }) => {
               </Tooltip>
             </Circle>
           ))}
+        <ZoomToCountry country={country} />
       </MapContainer>
     </MapWrapper>
   );
