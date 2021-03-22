@@ -3,13 +3,13 @@ import styled from "styled-components";
 import numeral from "numeral";
 import CountUp from "react-countup";
 
-const Counters = ({ data, country, globalData, backtoGlobalData }) => {
+const Counters = ({ briefData, country, showGlobalData, backtoGlobalData }) => {
   const formatNumbers = (number, f) => {
     if (f === "de") return new Intl.NumberFormat("de-DE").format(number);
     // if (f === "fr") return new Intl.NumberFormat("us-US").format(number);
   };
 
-  console.log("counters", globalData);
+  console.log("counters", showGlobalData);
   // if (!data.todayDeaths) {
   //   return `loading...`;
   // }
@@ -53,7 +53,7 @@ const Counters = ({ data, country, globalData, backtoGlobalData }) => {
               +{" "}
               {country
                 ? formatNumbers(country.todayCases, "de")
-                : formatNumbers(data.todayCases, "de")}
+                : formatNumbers(briefData.todayCases, "de")}
               {/* <CountUp
                 end={country ? country.todayCases : data.todayCases}
                 start={0}
@@ -65,7 +65,7 @@ const Counters = ({ data, country, globalData, backtoGlobalData }) => {
               {country
                 ? formatNumbers(country.cases, "de")
                 : // numeral(country.cases).format("0,0a")
-                  formatNumbers(data.confirmed, "de")}
+                  formatNumbers(briefData.confirmed, "de")}
               {/* numeral(data.confirmed).format("0,0a") */}
               {/* {country
               ? formatNumbers(country.cases, "de")
@@ -83,7 +83,7 @@ const Counters = ({ data, country, globalData, backtoGlobalData }) => {
               +{" "}
               {country
                 ? formatNumbers(country.critical, "de")
-                : formatNumbers(data.critical, "de")}
+                : formatNumbers(briefData.critical, "de")}
               {/* <CountUp
                 start={0}
                 end={country ? country.critical : data.critical}
@@ -97,7 +97,7 @@ const Counters = ({ data, country, globalData, backtoGlobalData }) => {
               : numeral(data.confirmed).format("0,0a")} */}
               {country
                 ? formatNumbers(country.critical, "de")
-                : formatNumbers(data.critical, "de")}
+                : formatNumbers(briefData.critical, "de")}
             </TotalWrapper>
           </BriefContainer>
         </Counter>
@@ -111,7 +111,7 @@ const Counters = ({ data, country, globalData, backtoGlobalData }) => {
               +{" "}
               {country
                 ? formatNumbers(country.todayDeaths, "de")
-                : formatNumbers(data.todayDeaths, "de")}
+                : formatNumbers(briefData.todayDeaths, "de")}
               {/* <CountUp
                 end={country ? country.todayDeaths : data.todayDeaths}
                 start={0}
@@ -125,7 +125,7 @@ const Counters = ({ data, country, globalData, backtoGlobalData }) => {
               : numeral(data.confirmed).format("0,0a")} */}
               {country
                 ? formatNumbers(country.deaths, "de")
-                : formatNumbers(data.deaths, "de")}
+                : formatNumbers(briefData.deaths, "de")}
             </TotalWrapper>
           </BriefContainer>
         </Counter>
@@ -139,7 +139,7 @@ const Counters = ({ data, country, globalData, backtoGlobalData }) => {
               +{" "}
               {country
                 ? formatNumbers(country.todayRecovered, "de")
-                : formatNumbers(data.todayRecovered, "de")}
+                : formatNumbers(briefData.todayRecovered, "de")}
               {/* <CountUp
                 end={country ? country.todayRecovered : data.todayRecovered}
                 start={0}
@@ -153,7 +153,7 @@ const Counters = ({ data, country, globalData, backtoGlobalData }) => {
               : numeral(data.confirmed).format("0,0a")} */}
               {country
                 ? formatNumbers(country.recovered, "de")
-                : formatNumbers(data.recovered, "de")}
+                : formatNumbers(briefData.recovered, "de")}
             </TotalWrapper>
           </BriefContainer>
         </Counter>

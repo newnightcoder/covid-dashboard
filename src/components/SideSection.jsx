@@ -171,10 +171,12 @@ const SideContainer = styled.div`
   border-left: 1px solid lightgray;
   display: grid;
   grid-template-rows: 7vh 8vh 35vh 45vh;
+  grid-auto-columns: 1fr;
   grid-gap: 1.5vh;
 `;
 
 const TitleWrapper = styled.div`
+  grid-row: 1;
   height: 100%;
   color: #eee;
   display: flex;
@@ -184,6 +186,7 @@ const TitleWrapper = styled.div`
 `;
 
 const ButtonsWrapper = styled.div`
+  grid-row: 2;
   height: 100%;
   color: #eee;
   display: flex;
@@ -243,6 +246,7 @@ const BtnToggle = styled(SortButton)`
 `;
 
 const TableContainerWrapper = styled.div`
+  grid-row: 3;
   color: white;
   height: 100%;
   width: 99%;
@@ -301,12 +305,13 @@ const TotalNumber = styled.div`
 `;
 
 const BarChartContainer = styled.div`
-  height: 100%;
+  grid-row: 4;
+  /* height: 100%; */
   width: 99%;
-  border: 1px solid red;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid red;
 `;
 
 const BarChartMsg = styled.div`

@@ -52,10 +52,10 @@ export const fetchHistoric = async (country) => {
     dead: [],
     chartCountries: [],
   };
-  // let chartCountries = [];
 
   for (let countries in data) {
     graphArray.chartCountries.push(countries);
+
     if (country) {
       for (let i = 0; i < graphArray.chartCountries.length; i++) {
         if (country === graphArray.chartCountries[i]) {
@@ -72,5 +72,6 @@ export const fetchHistoric = async (country) => {
       }
     }
   }
-  // console.log("graphArray", graphArray);
+  console.log("graph countries", graphArray.chartCountries);
 };
+fetchHistoric();

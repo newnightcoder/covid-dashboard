@@ -5,7 +5,7 @@ import Select from "react-select";
 // import { fetchBrief } from "../api";
 
 const AppHeader = ({
-  data,
+  briefData,
   countriesList,
   handleCountrySelection,
   handleChartSelection,
@@ -32,7 +32,7 @@ const AppHeader = ({
             }}
           >
             <div style={lastUpdateStyle}>
-              Last update:&nbsp;{new Date(data.update).toLocaleString()}
+              Last update:&nbsp;{new Date(briefData.update).toLocaleString()}
             </div>
             {/* <button style={refreshBtnStyle}>refresh</button> */}
           </div>

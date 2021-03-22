@@ -8,13 +8,14 @@ const Graphs = ({
   graphsData: { dates, cases, recov, dead },
   chartCountry,
 }) => {
-  return !dates || !cases || !recov || !dead ? (
-    <ChartContainer>
-      <div style={style}>
-        oops sorry! we do not have any info for this country
-      </div>
-    </ChartContainer>
-  ) : (
+  return (
+    // !dates || !cases || !recov || !dead ? (
+    //   <ChartContainer>
+    //     <div style={style}>
+    //       oops sorry! we do not have any info for this country
+    //     </div>
+    //   </ChartContainer>
+    // ) :
     <ChartContainer>
       {country ? (
         <Line
@@ -56,7 +57,7 @@ const Graphs = ({
           options={{
             title: {
               display: true,
-              text: chartCountry.toUpperCase(),
+              text: `${chartCountry.toUpperCase()} - EVOLUTION OF COVID-19 SINCE JANUARY 2020`,
             },
             legend: {
               labels: {
@@ -71,10 +72,6 @@ const Graphs = ({
       )}
     </ChartContainer>
   );
-
-  // return (
-
-  // );
 };
 
 export default Graphs;

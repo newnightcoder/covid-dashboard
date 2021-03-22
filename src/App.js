@@ -13,7 +13,7 @@ const AppWrapper = styled.div`
 
 class App extends React.Component {
   state = {
-    data: {},
+    briefData: {},
     countries: [],
     countriesList: [],
     country: "",
@@ -24,12 +24,12 @@ class App extends React.Component {
       recov: [],
       dead: [],
     },
-    globalData: true,
+    showGlobalData: true,
   };
 
   async componentDidMount() {
     const fetchedData = await fetchBriefData();
-    this.setState({ data: fetchedData });
+    this.setState({ briefData: fetchedData });
 
     const fetchedCountries = await fetchCountriesData();
     this.setState({ countries: fetchedCountries });
@@ -38,33 +38,30 @@ class App extends React.Component {
     const listing = list.map((country) => country.country);
     this.setState({ countriesList: listing });
     console.log(this.state.countriesList);
-
-    // const fetchedChartData = await fetchHistoric();
-    // // this.setState({ chartCountry: country });
-    // this.setState({ graphsData: { dates: fetchedChartData.dates } });
-    // this.setState({ graphsData: { cases: fetchedChartData.cases } });
-    // this.setState({ graphsData: { recov: fetchedChartData.recov } });
-    // this.setState({ graphsData: { dead: fetchedChartData.dead } });
   }
 
   handleCountrySelection = async (country) => {
     const fetchedCountry = await fetchCountriesData(country);
     this.setState({ country: fetchedCountry });
     if (country) {
-      this.setState({ globalData: false });
+      this.setState({ showGlobalData: false });
     } else return;
-    console.log("select", this.state.globalData);
+    console.log("select", this.state.showGlobalData);
   };
 
   handleGlobalData = (country) => {
     if (country) {
-      this.setState((prevState) => ({ globalData: !prevState.globalData }));
+      this.setState((prevState) => ({
+        showGlobalData: !prevState.showGlobalData,
+      }));
     } else return;
-    console.log("counters", this.state.globalData);
+    console.log("counters", this.state.showGlobalData);
   };
 
   backtoGlobalData = () => {
-    this.setState((prevState) => ({ globalData: !prevState.globalData }));
+    this.setState((prevState) => ({
+      showGlobalData: !prevState.showGlobalData,
+    }));
   };
 
   handleChartSelection = async (country) => {
@@ -88,15 +85,15 @@ class App extends React.Component {
       <AppWrapper>
         {" "}
         <AppHeader
-          data={this.state.data}
+          briefData={this.state.briefData}
           countriesList={this.state.countriesList}
           handleCountrySelection={this.handleCountrySelection}
           handleChartSelection={this.handleChartSelection}
         />
         <Counters
-          data={this.state.data}
+          briefData={this.state.briefData}
           country={this.state.country}
-          globalData={this.state.globalData}
+          showGlobalData={this.state.showGlobalData}
           backtoGlobalData={this.backtoGlobalData}
         />
         <Main
