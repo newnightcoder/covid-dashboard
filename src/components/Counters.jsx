@@ -23,7 +23,7 @@ const Counters = ({ briefData, country, showGlobalData, backtoGlobalData }) => {
   return (
     <SectionWrapper>
       <SectionTitle>
-        {country ? (
+        {country && !showGlobalData ? (
           <div
             style={{
               display: "flex",
@@ -51,7 +51,7 @@ const Counters = ({ briefData, country, showGlobalData, backtoGlobalData }) => {
             <Label>infected</Label>
             <TodayWrapper>
               +{" "}
-              {country
+              {country && !showGlobalData
                 ? formatNumbers(country.todayCases, "de")
                 : formatNumbers(briefData.todayCases, "de")}
               {/* <CountUp
@@ -62,7 +62,7 @@ const Counters = ({ briefData, country, showGlobalData, backtoGlobalData }) => {
               ></CountUp>{" "} */}
             </TodayWrapper>
             <TotalWrapper>
-              {country
+              {country && !showGlobalData
                 ? formatNumbers(country.cases, "de")
                 : // numeral(country.cases).format("0,0a")
                   formatNumbers(briefData.confirmed, "de")}
@@ -81,7 +81,7 @@ const Counters = ({ briefData, country, showGlobalData, backtoGlobalData }) => {
             <Label>severe</Label>
             <TodayWrapper>
               +{" "}
-              {country
+              {country && !showGlobalData
                 ? formatNumbers(country.critical, "de")
                 : formatNumbers(briefData.critical, "de")}
               {/* <CountUp
@@ -95,7 +95,7 @@ const Counters = ({ briefData, country, showGlobalData, backtoGlobalData }) => {
               {/* {country
               ? numeral(country.cases).format("0,0a")
               : numeral(data.confirmed).format("0,0a")} */}
-              {country
+              {country && !showGlobalData
                 ? formatNumbers(country.critical, "de")
                 : formatNumbers(briefData.critical, "de")}
             </TotalWrapper>
@@ -109,7 +109,7 @@ const Counters = ({ briefData, country, showGlobalData, backtoGlobalData }) => {
             <Label>deaths</Label>
             <TodayWrapper>
               +{" "}
-              {country
+              {country && !showGlobalData
                 ? formatNumbers(country.todayDeaths, "de")
                 : formatNumbers(briefData.todayDeaths, "de")}
               {/* <CountUp
@@ -123,7 +123,7 @@ const Counters = ({ briefData, country, showGlobalData, backtoGlobalData }) => {
               {/* {country
               ? numeral(country.cases).format("0,0a")
               : numeral(data.confirmed).format("0,0a")} */}
-              {country
+              {country && !showGlobalData
                 ? formatNumbers(country.deaths, "de")
                 : formatNumbers(briefData.deaths, "de")}
             </TotalWrapper>
@@ -137,7 +137,7 @@ const Counters = ({ briefData, country, showGlobalData, backtoGlobalData }) => {
             <Label>recovered</Label>
             <TodayWrapper>
               +{" "}
-              {country
+              {country && !showGlobalData
                 ? formatNumbers(country.todayRecovered, "de")
                 : formatNumbers(briefData.todayRecovered, "de")}
               {/* <CountUp
@@ -151,7 +151,7 @@ const Counters = ({ briefData, country, showGlobalData, backtoGlobalData }) => {
               {/* {country
               ? numeral(country.cases).format("0,0a")
               : numeral(data.confirmed).format("0,0a")} */}
-              {country
+              {country && !showGlobalData
                 ? formatNumbers(country.recovered, "de")
                 : formatNumbers(briefData.recovered, "de")}
             </TotalWrapper>

@@ -49,14 +49,14 @@ class App extends React.Component {
     console.log("select", this.state.showGlobalData);
   };
 
-  handleGlobalData = (country) => {
-    if (country) {
-      this.setState((prevState) => ({
-        showGlobalData: !prevState.showGlobalData,
-      }));
-    } else return;
-    console.log("counters", this.state.showGlobalData);
-  };
+  // handleGlobalData = (country) => {
+  //   if (country) {
+  //     this.setState((prevState) => ({
+  //       showGlobalData: !prevState.showGlobalData,
+  //     }));
+  //   } else return;
+  //   console.log("counters", this.state.showGlobalData);
+  // };
 
   backtoGlobalData = () => {
     this.setState((prevState) => ({
@@ -99,6 +99,7 @@ class App extends React.Component {
           countriesList={this.state.countriesList}
           handleCountrySelection={this.handleCountrySelection}
           handleChartSelection={this.handleChartSelection}
+          showGlobalData={this.state.showGlobalData}
         />
         <Counters
           briefData={this.state.briefData}
@@ -111,6 +112,7 @@ class App extends React.Component {
           country={this.state.country}
           chartCountry={this.state.chartCountry}
           graphsData={this.state.graphsData}
+          showGlobalData={this.state.showGlobalData}
         />
         <SideSection
           countries={this.state.countries}

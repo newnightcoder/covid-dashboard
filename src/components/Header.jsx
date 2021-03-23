@@ -9,6 +9,7 @@ const AppHeader = ({
   countriesList,
   handleCountrySelection,
   handleChartSelection,
+  showGlobalData,
 }) => {
   const options = countriesList.map((country) => {
     return { value: country, label: country };

@@ -7,8 +7,9 @@ const Graphs = ({
   country,
   graphsData: { dates, cases, recov, dead },
   chartCountry,
+  showGlobalData,
 }) => {
-  return !dates || !cases || !recov || !dead ? (
+  return (!dates || !cases || !recov || !dead) && !showGlobalData ? (
     <ChartContainer>
       <div style={style}>
         oops sorry!
@@ -17,7 +18,7 @@ const Graphs = ({
     </ChartContainer>
   ) : (
     <ChartContainer>
-      {country ? (
+      {country && !showGlobalData ? (
         <Line
           height={40}
           width={100}
