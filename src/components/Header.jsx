@@ -1,5 +1,4 @@
 import React from "react";
-import ErrorBoundary from "./ErrorBoundary";
 import styled from "styled-components";
 import AppBar from "@material-ui/core/AppBar";
 import Select from "react-select";
@@ -33,7 +32,9 @@ const AppHeader = ({
             }}
           >
             <div style={lastUpdateStyle}>
-              Last update:&nbsp;{new Date(briefData.update).toLocaleString()}
+              {briefData.update
+                ? `Last update: ${new Date(briefData.update).toLocaleString()}`
+                : "Last update: loading..."}
             </div>
             {/* <button style={refreshBtnStyle}>refresh</button> */}
           </div>
