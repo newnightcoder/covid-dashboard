@@ -77,7 +77,17 @@ class App extends React.Component {
           dead: fetchedChartData.dead,
         },
       });
-    } else return null;
+    } else {
+      this.setState({
+        graphsData: {
+          ...this.state.graphsData,
+          dates: null,
+          cases: null,
+          recov: null,
+          dead: null,
+        },
+      });
+    }
   };
 
   render() {

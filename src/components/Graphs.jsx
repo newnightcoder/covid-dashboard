@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { fetchHistoric } from "../api/index";
-import { Line, Bar } from "react-chartjs-2";
+// import { fetchHistoric } from "../api/index";
+import { Line } from "react-chartjs-2";
 
 const Graphs = ({
   country,
   graphsData: { dates, cases, recov, dead },
   chartCountry,
 }) => {
-  return (
-    // !dates || !cases || !recov || !dead ? (
-    //   <ChartContainer>
-    //     <div style={style}>
-    //       oops sorry! we do not have any info for this country
-    //     </div>
-    //   </ChartContainer>
-    // ) :
+  return !dates || !cases || !recov || !dead ? (
+    <ChartContainer>
+      <div style={style}>
+        oops sorry!
+        <br /> There is no historic data available for this country...
+      </div>
+    </ChartContainer>
+  ) : (
     <ChartContainer>
       {country ? (
         <Line
@@ -88,7 +88,9 @@ const style = {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  border: "1px solid red",
-  fontSize: "2rem",
+  textAlign: "center",
+  fontSize: "1.25rem",
+  lineHeight: "1.75rem",
   color: "#eee",
+  // border: "1px solid red",
 };
