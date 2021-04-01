@@ -3,12 +3,15 @@ import { AppHeader, Counters, Main, SideSection } from "./components/component";
 import { fetchBriefData, fetchCountriesData, fetchHistoric } from "./api";
 import styled from "styled-components";
 
+const appHeight =
+  window.innerHeight < 800 ? "90px 120px 1fr" : "120px 150px 1fr";
+
 const AppWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-columns: 70% 30%;
-  grid-template-rows: 90px 120px 1fr;
+  grid-template-columns: 75% 25%;
+  grid-template-rows: ${appHeight};
   grid-row-gap: 10px;
 `;
 

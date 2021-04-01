@@ -249,7 +249,7 @@ const FlagImg = styled.img`
 `;
 //----------------------------------------------------------------
 const CountersWrapper = styled.div`
-  height: 60px;
+  height: 80px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -258,8 +258,8 @@ const CountersWrapper = styled.div`
 `;
 //----------------------------------------------------------------
 const Counter = styled.div`
-  /* border: 1px solid red; */
-  width: 18%;
+  border: 1px solid lightblue;
+  width: 19%;
   height: 100%;
   display: grid;
   grid-template-columns: 35% 7.5% 1fr;
@@ -308,6 +308,7 @@ const IconContainer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${(props) => theme[props.theme].default};
+  border: 1px solid blue;
 `;
 
 const iconStyle = {

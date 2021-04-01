@@ -18,28 +18,17 @@ const AppHeader = ({
   return (
     <Header>
       <AppBar style={appBarStyle}>
-        <AppBarWrapper>
-          <div style={{ fontSize: "2.5rem" }}>
-            covid-19 live &nbsp;
-            <i className="fas fa-virus" style={coronaIconStyle}></i>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              // alignItems: "center",
-              // justifyContent: "center",
-              // border: "1px solid yellow",
-              width: "100%",
-            }}
-          >
-            <div style={lastUpdateStyle}>
-              {briefData.update
-                ? `Last update: ${new Date(briefData.update).toLocaleString()}`
-                : "Last update: loading..."}
-            </div>
+        <TitleWrapper>
+          <i className="fas fa-virus" style={coronaIconStyle}></i>
+
+          <Title>covid-19 live &nbsp;</Title>
+          <LastUpdate>
+            {briefData.update
+              ? `Last update: ${new Date(briefData.update).toLocaleString()}`
+              : "Last update: loading..."}
             {/* <button style={refreshBtnStyle}>refresh</button> */}
-          </div>
-        </AppBarWrapper>
+          </LastUpdate>
+        </TitleWrapper>
         <Select
           placeholder="select or type a country..."
           options={options}
@@ -59,7 +48,6 @@ export default AppHeader;
 const Header = styled.div`
   grid-row: 1;
   grid-column: 1/2;
-  /* height: 90px; */
   text-align: center;
   display: flex;
   align-items: center;
@@ -84,13 +72,11 @@ const appBarStyle = {
   color: "#eeee",
   // backgroundColor: "#353535",
   backgroundColor: "#272727",
-
-  // height: "90px",
   width: "100%",
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
-  justifyContent: "space-around",
+  justifyContent: "space-between",
   fontSize: "3rem",
   textTransform: "uppercase",
   fontWeight: "700",
@@ -98,36 +84,49 @@ const appBarStyle = {
   boxShadow: "none",
 };
 
-const AppBarWrapper = styled.div`
+const TitleWrapper = styled.div`
   height: 100%;
   width: 40%;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  grid-template-rows: 2;
   text-align: left;
   /* border: 1px solid red; */
 `;
 
+const Title = styled.div`
+  grid-column: 2;
+  grid-row: 1;
+  font-size: 2.5rem;
+  white-space: nowrap;
+`;
+
 const coronaIconStyle = {
+  gridColumn: "1",
+  gridRow: "span 2",
+  width: "80px",
   animation: "bleep 3000ms infinite",
-  fontSize: "3rem",
-  position: "absolute",
-  left: ".75vw",
-  top: "2vh",
+  fontSize: "3.5rem",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  // border: "1px solid white",
 };
 
-const lastUpdateStyle = {
-  height: "20px",
-  width: "100%",
-  color: "#eeee",
-  fontSize: ".75rem",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "left",
-  marginLeft: ".5vw",
-  // border: "1px solid red",
-};
+const LastUpdate = styled.div`
+  grid-column: 2;
+  grid-row: 2;
+  width: 100%;
+  height: 20px;
+  color: #eeee;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding-left: 5px;
+  white-space: nowrap;
+  /* border: 1px solid yellow; */
+`;
 
 const refreshBtnStyle = {
   cursor: "pointer",
@@ -136,7 +135,9 @@ const refreshBtnStyle = {
 const selectStyles = {
   container: (provided, state) => ({
     ...provided,
-    width: "30%",
+    width: "300px",
+    marginRight: "50px",
+    border: "1px solid red",
   }),
   control: (provided, state) => ({
     ...provided,
