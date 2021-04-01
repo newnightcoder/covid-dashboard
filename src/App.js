@@ -8,7 +8,8 @@ const AppWrapper = styled.div`
   height: 100vh;
   display: grid;
   grid-template-columns: 70% 30%;
-  grid-template-rows: 100px min-content 1fr;
+  grid-template-rows: 90px 120px 1fr;
+  grid-row-gap: 10px;
 `;
 
 class App extends React.Component {
@@ -58,15 +59,15 @@ class App extends React.Component {
   //   console.log("counters", this.state.showGlobalData);
   // };
 
-  backtoGlobalData = () => {
+  backtoGlobalData = (e) => {
     this.setState((prevState) => ({
       showGlobalData: !prevState.showGlobalData,
     }));
   };
 
   handleChartSelection = async (country) => {
-    this.setState({ chartCountry: country });
     const fetchedChartData = await fetchHistoric(country);
+    this.setState({ chartCountry: country });
     if (fetchedChartData) {
       this.setState({
         graphsData: {

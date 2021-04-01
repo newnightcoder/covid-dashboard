@@ -193,12 +193,12 @@ const theme = {
 
 const SectionWrapper = styled.div`
   grid-row: 2;
-  height: 18vh;
+  /* height: 18vh; */
   /* margin-top: 2vh; */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* border: 1px solid yellow; */
+  border: 1px solid yellow;
 `;
 //----------------------------------------------------------------
 const SectionTitle = styled.div`
@@ -206,13 +206,13 @@ const SectionTitle = styled.div`
   color: white;
   padding-left: 1.5vw;
   text-transform: uppercase;
-  height: 50%;
+  height: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 1vh;
+  /* margin-bottom: 1vh; */
   position: relative;
-  /* border: 1px solid red; */
+  border: 1px solid red;
 `;
 
 const SectionTitleLink = styled.div`
@@ -249,12 +249,12 @@ const FlagImg = styled.img`
 `;
 //----------------------------------------------------------------
 const CountersWrapper = styled.div`
-  height: 50px;
+  height: 60px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  /* border: 1px solid pink; */
+  border: 1px solid pink;
 `;
 //----------------------------------------------------------------
 const Counter = styled.div`
@@ -293,10 +293,10 @@ const Counter = styled.div`
       background-color: ${(props) => theme[props.theme].default};
     }
   }
-  @media (max-width: 800px) {
+  /* @media (max-width: 800px) {
     width: 30%;
     height: 100%;
-  }
+  } */
 `;
 
 const IconContainer = styled.div`

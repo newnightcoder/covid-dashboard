@@ -89,7 +89,7 @@ const SideSection = ({ countries, country }) => {
             labels: [
               barChartCountry1.country,
               barChartCountry2 ? barChartCountry2.country : "country 2",
-              barChartCountry3 ? barChartCountry3.country : "country",
+              barChartCountry3 ? barChartCountry3.country : "country 3",
             ],
             datasets: [
               {
@@ -155,6 +155,8 @@ const SideSection = ({ countries, country }) => {
       <TableContainerWrapper>
         <TableContainer>{sortCountriesRanking(country)}</TableContainer>
       </TableContainerWrapper>
+      <ClearButton theme="clear">clear graph</ClearButton>
+
       <BarChartContainer>{displayBarChart()}</BarChartContainer>
     </SideContainer>
   );
@@ -170,7 +172,7 @@ const SideContainer = styled.div`
   background-color: #181818;
   border-left: 1px solid lightgray;
   display: grid;
-  grid-template-rows: 7vh 8vh 35vh 45vh;
+  grid-template-rows: 7vh 4vh 35vh 45vh;
   grid-auto-columns: 1fr;
   grid-gap: 1.5vh;
 `;
@@ -208,12 +210,15 @@ const theme = {
   vaccinated: {
     default: "deepskyblue",
   },
+  clear: {
+    default: "#eee",
+  },
 };
 
 const SortButton = styled.button`
   /* border: 1px solid red; */
   width: 24%;
-  height: 50%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -243,6 +248,10 @@ const BtnToggle = styled(SortButton)`
     css`
       border: 2px solid ${(props) => theme[props.theme].default};
     `}
+`;
+
+const ClearButton = styled(SortButton)`
+  margin: -1vh 0 0 30%;
 `;
 
 const TableContainerWrapper = styled.div`

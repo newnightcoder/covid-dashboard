@@ -97,7 +97,7 @@ const WorldMap = ({ countries, country }) => {
 export default WorldMap;
 
 const MapWrapper = styled.div`
-  height: 90%;
-  width: 99.5%;
+  height: 100%;
+  width: 100%;
   /* border: 2px solid gray; */
 `;

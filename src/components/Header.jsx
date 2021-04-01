@@ -59,7 +59,7 @@ export default AppHeader;
 const Header = styled.div`
   grid-row: 1;
   grid-column: 1/2;
-  height: 90px;
+  /* height: 90px; */
   text-align: center;
   display: flex;
   align-items: center;
@@ -85,7 +85,7 @@ const appBarStyle = {
   // backgroundColor: "#353535",
   backgroundColor: "#272727",
 
-  height: "90px",
+  // height: "90px",
   width: "100%",
   display: "flex",
   flexDirection: "row",
